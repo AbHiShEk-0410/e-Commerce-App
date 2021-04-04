@@ -2,8 +2,8 @@ import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
 
 export function Cart() {
-  const [cartState, cartDispatch] = useCart();
-  const [wishlistState, WishlistDispatch] = useWishlist();
+  const {cartState, cartDispatch} = useCart();
+  const {WishlistDispatch} = useWishlist();
 
   return (
     <div>
