@@ -3,7 +3,7 @@ import { useReducer, useContext, createContext } from "react";
 const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
-  function WishlistReducer({ wishlist, idInWishlist }, { query, item }) {
+  function WishlistReducer({ wishlistItems, idInWishlist }, { query, item }) {
     // This function is to handle all the functionalities related to wishlist management i.e
     // Remove from Wishlist and Add to Cart
 
@@ -13,22 +13,22 @@ export function WishlistProvider({ children }) {
         if (idInWishlist.includes(item.id) !== undefined) {
           return {
             idInWishlist: idInWishlist.filter((id) => id !== item.id),
-            wishlist: wishlist.filter(
+            wishlistItems: wishlistItems.filter(
               (itemInWishlist) => item.id !== itemInWishlist.id
             )
           };
         } else {
           return {
             idInWishlist: [...idInWishlist, item.id],
-            wishlist: [...wishlist, item]
+            wishlistItems: [...wishlistItems, item]
           };
         }
       default:
-        return { wishlist, idInWishlist };
+        return { wishlistItems, idInWishlist };
     }
   }
   const [wishlistState, wishlistDispatch] = useReducer(WishlistReducer, {
-    wishlist: [],
+    wishlistItems: [],
     idInWishlist: []
   });
   return (
