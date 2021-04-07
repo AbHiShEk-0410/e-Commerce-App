@@ -1,4 +1,4 @@
-import faker from "faker";
+var faker = require("./faker")
 faker.seed(123);
 
 export const data = [...Array(50)].map((item) => ({
