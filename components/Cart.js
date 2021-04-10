@@ -1,10 +1,11 @@
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
 import { useEffect, useState } from "react";
+import { checkItemInObject } from "../utilities/checkItemInObject";
 
 export function Cart() {
   const { cartState, cartDispatch } = useCart();
-  const { wishlistDispatch } = useWishlist();
+  const { wishlistState, wishlistDispatch } = useWishlist();
   const [balance, setBalance] = useState(0);
   function useTotalPriceCalculator() {
     useEffect(() => {
@@ -29,7 +30,10 @@ export function Cart() {
           <button
             onClick={() =>
               cartDispatch({
-                query: "SUBTRACT_ONE_MORE",
+                query:
+                  itemInCart.quantity === 1
+                    ? "REMOVE_FROM_CART"
+                    : "SUBTRACT_ONE_MORE",
                 item: itemInCart
               })
             }
@@ -60,7 +64,9 @@ export function Cart() {
           <button
             onClick={() =>
               wishlistDispatch({
-                query: "ADD_OR_REMOVE_FROM_WISHLIST",
+                query: checkItemInObject(wishlistState.idInWishlist, itemInCart)
+                  ? "REMOVE_FROM_WISHLIST"
+                  : "ADD_TO_WISHLIST",
                 item: itemInCart
               })
             }
