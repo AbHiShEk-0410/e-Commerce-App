@@ -1,9 +1,10 @@
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
+import { checkItemInObject } from "../utilities/checkItemInObject";
+
 export function Wishlist() {
   const { wishlistState, wishlistDispatch } = useWishlist();
-  const { cartDispatch } = useCart();
-
+  const { cartState, cartDispatch } = useCart();
   return (
     <div>
       {wishlistState.wishlistItems.map((itemInWishlist) => (
@@ -14,7 +15,7 @@ export function Wishlist() {
           <button
             onClick={() =>
               wishlistDispatch({
-                query: "ADD_OR_REMOVE_FROM_CART",
+                query: "REMOVE_FROM_WISHLIST",
                 item: itemInWishlist
               })
             }
@@ -22,13 +23,16 @@ export function Wishlist() {
             Wishlist
           </button>
           <button
+            disabled={checkItemInObject(cartState.idInCart, itemInWishlist)}
             onClick={() =>
               cartDispatch({
                 query: "ADD_TO_CART",
                 item: itemInWishlist
               })
             }
-          >Add to Cart</button>
+          >
+            Add to Cart
+          </button>
         </div>
       ))}
     </div>
