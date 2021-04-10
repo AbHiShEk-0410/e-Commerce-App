@@ -1,39 +1,49 @@
 import { data } from "../utilities/database";
 import { useCart } from "../contexts/CartContext";
 import { useWishlist } from "../contexts/WishlistContext";
+import { checkItemInObject } from "../utilities/checkItemInObject";
 
 export function Product() {
-  const {cartDispatch} = useCart();
-  const {wishlistDispatch} = useWishlist();
+  const { wishlistState, wishlistDispatch } = useWishlist();
+  const { cartState, cartDispatch } = useCart();
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
-      {data.map((itemInProducts) => (
-        <div style={{ border: "1px solid black" }} key={itemInProducts.id}>
-          <img width="70%" src={itemInProducts.image} alt="img"></img>
-          <h1>{itemInProducts.name}</h1>
-          <strong>{itemInProducts.origin}</strong>
-          <strong>{itemInProducts.type}</strong>
-          <h2>{itemInProducts.brand}</h2>
-          <h2>{itemInProducts.price}</h2>
-          <h3>{itemInProducts.rating}</h3>
-          <strong>{itemInProducts.offer}</strong>
-          <p>{itemInProducts.delivery}</p>
+      {data.map((itemInProduct) => (
+        <div style={{ border: "1px solid black" }} key={itemInProduct.id}>
+          <img width="70%" src={itemInProduct.image} alt="img"></img>
+          <h1>{itemInProduct.name}</h1>
+          <strong>{itemInProduct.origin}</strong>
+          <strong>{itemInProduct.type}</strong>
+          <h2>{itemInProduct.brand}</h2>
+          <h2>{itemInProduct.price}</h2>
+          <h3>{itemInProduct.rating}</h3>
+          <strong>{itemInProduct.offer}</strong>
+          <p>{itemInProduct.delivery}</p>
           <button
-            onClick={() =>
+            type="button"
+            disabled={checkItemInObject(cartState.idInCart, itemInProduct)}
+            onClick={() => {
               cartDispatch({
                 query: "ADD_TO_CART",
-                item: itemInProducts
-              })
-            }
+                item: itemInProduct
+              });
+            }}
           >
-            Add to Cart
+            {checkItemInObject(cartState.idInCart, itemInProduct)
+              ? "Added to Cart"
+              : "Add to Cart"}
           </button>
           <button
             onClick={() =>
               wishlistDispatch({
-                query: "ADD_OR_REMOVE_FROM_WISHLIST",
-                item: itemInProducts
+                query: checkItemInObject(
+                  wishlistState.idInWishlist,
+                  itemInProduct
+                )
+                  ? "REMOVE_FROM_WISHLIST"
+                  : "ADD_TO_WISHLIST",
+                item: itemInProduct
               })
             }
           >
