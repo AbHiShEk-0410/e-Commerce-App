@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap");
+
+:root {
+  --primary-color: black;
+  --secondary-color: white;
+  --border-size: 1px;
+}
+:after,
+:before,
+* {
+  padding: 0rem;
+  margin: 0rem;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  border: var(--border-size) solid var(--primary-color);
+  border-radius: 0rem 0rem 1rem 1rem;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  align-items: center;
+}
+.linear-div {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-between;
+}
+.left-nav-content {
+  width: 90%;
+}
+.left-nav-content h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+}
+.right-nav-content {
+  width: 23rem;
+}
+.router {
+  display: flex;
+  align-items: center;
+}
+.router-heading {
+  margin-right: 0.3rem;
+  font-weight: lighter;
+}
+.profile {
+  position: relative;
+  height: 3rem;
+}
+.drop-down-menu {
+  display: none;
+  position: absolute;
+  background-color: var(--primary-color);
+  top: 50px;
+  right: 0;
+  border: 1px solid var(--secondary-color);
+  padding: 24px 0px;
+}
+.drop-down-link {
+  white-space: nowrap;
+  padding: 7.5px 15px;
+  display: block;
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+.profile:hover > .drop-down-menu {
+  display: block;
+}
+.drop-down-menu:after {
+  position: absolute;
+  right: 20%;
+  margin-left: -20px;
+  top: -10px;
+  width: 0;
+  right: 1px;
+  height: 0;
+  content: "";
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--secondary-color);
+}
+@media screen and (max-width: 800px) {
+  .router-heading {
+    display: none;
+  }
+  .right-nav-content {
+    width: 10rem;
+  }
+  .router-icon {
+    font-size: 1.3rem;
+  }
+  .drop-down-menu:last-child .router .router-heading{
+  display: block;
+  font-size: 17px;  
+ }
+ .drop-down-menu:last-child .router .router-icon{
+  font-size: 15px;
+ }
+}
