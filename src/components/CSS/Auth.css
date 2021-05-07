@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,100;1,300&display=swap");
+::after,
+::before,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary-color: #00203fff;
+  --secondary-color: #adefd1ff;
+  --ternary-white: rgba(224, 224, 224, 0);
+  --secondary-black: #b3a2a2;
+  --button-radius: 0.3rem;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+body {
+  background: var(--ternary-white);
+}
+.login {
+  display: flex;
+  padding: 6rem 0rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 5% 4% 0% 4%;
+}
+.brand {
+  padding: 0.3rem;
+  top: 50%;
+  max-width: 55%;
+}
+.brand-name {
+  color: var(--primary-color);
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+  font-size: 70px;
+  display: block;
+  text-align: left;
+}
+.brand p {
+  font-size: 30px;
+  text-align: left;
+  color: var(--secondary-black);
+}
+.brand p strong {
+  color: var(--primary-color);
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  position: relative;
+  border: 1px solid var(--secondary-black);
+  height: 24rem;
+  width: 25rem;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1rem;
+}
+.login-form input {
+  border-radius: var(--button-radius);
+  border: 0.4px solid var(--secondary-black);
+  padding: 0.8rem;
+  justify-content: space-evenly;
+}
+.login-card * {
+  font-size: 20px;
+}
+.login-button {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.forgot-password {
+  font-size: 17px;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+.separator {
+  position: absolute;
+  border: none;
+  bottom: 0;
+  text-align: center;
+  background: var(--secondary-black);
+  height: 2px;
+  margin-bottom: 6rem;
+  width: 96%;
+}
+.signup-button {
+  padding: 0.5rem;
+  background-color: var(--secondary-color);
+  border-radius: var(--button-radius);
+  border-color: transparent;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.forgot-password:hover {
+  text-decoration: underline;
+}
+@media only screen and (max-width: 966px) {
+  .brand {
+    margin-bottom: 3rem;
+    max-width: 80%;
+  }
+}
