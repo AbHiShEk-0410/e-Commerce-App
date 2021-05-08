@@ -5,19 +5,20 @@
   --secondary-dark-color: rgb(129, 241, 191);
   --ternary-white: rgba(224, 224, 224, 0);
   --secondary-black: #b3a2a2;
-  --button-radius: 0.3rem;
+  --button-radius: 0.4rem;
 }
 ::after,
 ::before,
 * {
   padding: 0;
-  margin: 0;
+  cursor: default;
   box-sizing: border-box;
 }
 body {
   background: var(--ternary-white);
+
 }
-.signup {
+.signup-page {
   display: flex;
   position: absolute;
   margin: 3% auto;
@@ -26,7 +27,7 @@ body {
   justify-content: space-around;
   padding: 6rem 0rem;
   flex-wrap: wrap;
-  top: 5%;
+  top: 1%;
   box-shadow: 0px 0px 11px 4px #888888;
   align-items: center;
 }
@@ -37,20 +38,20 @@ body {
   width: 100%;
 }
 .signup-card {
-  width: 25rem;
+  width: 26rem;
   height: 100%;
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 }
-
 .logo {
   display: flex;
 }
 .logo img {
   height: 2.5rem;
   width: auto;
+  margin-left:7px;
 }
 .logo h3 {
   font-family: "Raleway", sans-serif;
@@ -60,23 +61,50 @@ body {
 }
 .welcome-note {
   text-align-last: left;
+  margin-left:14px;
   color: var(--secondary-color);
 }
 .tag-line {
   text-align: left;
-}
-.login-form{
-  padding:1rem;
-
+  margin-left: 19px;
+  font-style: italic;
+  color:var(--secondary-black);
 }
 .signup-inputs {
   display: flex;
   flex-direction: column;
+  height: 20rem;
+  width: 110%;
   justify-content: space-between;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1rem;
+}
+.signin-form input {
+  border-radius: var(--button-radius);
+  border: 0.4px solid var(--secondary-black);
+  padding: 0.8rem;
+  font-size: 17px;
+  justify-content: space-evenly;
+}
+.tag-line:hover {
+  color:black;
+}
+input{
+  cursor: auto;
+}
+a{
+  cursor: pointer;
 }
 @media only screen and (max-width: 978px) {
   .signup-card {
-    margin-top: 4rem;
+   
+    margin: 4rem 2rem 0rem 2rem;
     max-width: 80%;
   }
 }
