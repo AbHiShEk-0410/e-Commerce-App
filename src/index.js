@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { CartProvider, WishlistProvider, AuthProvider, SortFilterProvider } from "./contexts";
+import { CartProvider, WishlistProvider, LoginProvider, SortFilterProvider } from "./contexts";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <AuthProvider>
+    <LoginProvider>
       <CartProvider>
         <WishlistProvider>
           <SortFilterProvider>
@@ -17,7 +17,7 @@ ReactDOM.render(
           </SortFilterProvider>
         </WishlistProvider>
       </CartProvider>
-    </AuthProvider>
+    </LoginProvider>
   </StrictMode>,
   rootElement
 );

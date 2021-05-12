@@ -1,9 +1,9 @@
 import "./CSS/signup.css"
 import signup_banner from "../images/singup_banner.png"
 import front_logo from "../images/front-logo.png"
-import logo_back from "../images/logo-back.png"
 export default function Signup() {
     return (
+
         <div className="signup-page">
             <div className="signup-content">
                 <div className="signup-banner">
@@ -38,7 +38,7 @@ export default function Signup() {
                         </p>
                     </div>
                 </div>
-            </div>
-        </div >
+            </div >
+        </div>
     )
 }

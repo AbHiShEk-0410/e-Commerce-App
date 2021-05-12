@@ -1,16 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
-import { Product, Wishlist, Auth, Cart, Loader, Signup } from "./components";
+import { Product, Wishlist, Login, Cart, Loader, Signup, PrivateRoute } from "./components";
 import { Link, Route, Routes } from "react-router-dom";
-import { useAuth } from "./contexts";
+import { useLogin } from "./contexts";
 function Forbidden() {
   return <h1>Nothing like that existss</h1>;
 }
 export default function App() {
 
   const [hideNav, setHideNav] = useState(false);
-  const { login, setLogin, loader } = useAuth();
+  const { login, setLogin, loader } = useLogin();
 
   return (
     <div className="App">
@@ -35,14 +35,14 @@ export default function App() {
         <Route exact path="/">
           <Product />
         </Route>
-        <Route path="/cart">
+        <PrivateRoute path="/cart">
           <Cart />
-        </Route>
-        <Route path="/wishlist">
+        </PrivateRoute>
+        <PrivateRoute path="/wishlist">
           <Wishlist />
-        </Route>
+        </PrivateRoute>
         <Route path="/login">
-          <Auth />
+          <Login />
         </Route>
         <Route path="signup">
           <Signup />
