@@ -2,7 +2,6 @@ import "./CSS/signup.css"
 import signup_banner from "../images/singup_banner.png"
 import front_logo from "../images/front-logo.png"
 import logo_back from "../images/logo-back.png"
-import { getByDisplayValue } from "@testing-library/dom"
 export default function Signup() {
     return (
         <div className="signup-page">

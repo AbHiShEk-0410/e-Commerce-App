@@ -6,8 +6,8 @@ export function SortFilterProvider({ children }) {
   function SortFilterReducer(state, action) {
 
     switch (action.type) {
-      case "SORT_BY":
-        return { ...state, sortBy: action.pyload };
+      case "SORT":
+        return { ...state, sortBy: action.payload };
 
       case "TOGGLE_INVENTORY":
         return { ...state, showInventory: !state.showInventory };
@@ -34,6 +34,6 @@ export function SortFilterProvider({ children }) {
 }
 
 export function useSortFilter() {
-
+  
   return useContext(SortFilterContext);
 }

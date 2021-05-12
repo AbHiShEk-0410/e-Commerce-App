@@ -1,11 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { StrictMode } from "react";
+import ReactDOM from "react-dom";
+import { CartProvider, WishlistProvider, AuthProvider, SortFilterProvider } from "./contexts";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
 
+const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <StrictMode>
+    <AuthProvider>
+      <CartProvider>
+        <WishlistProvider>
+          <SortFilterProvider>
+            <Router>
+              <App />
+            </Router>
+          </SortFilterProvider>
+        </WishlistProvider>
+      </CartProvider>
+    </AuthProvider>
+  </StrictMode>,
+  rootElement
 );

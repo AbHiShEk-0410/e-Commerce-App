@@ -5,20 +5,22 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
     if (isItemInCart) {
         return (
             <>
-                <Link
-                    to="/cart"
-                >
-                    <button>View Cart</button>
+                <Link to="/cart">
+                    <button
+                        style={{
+                            backgroundColor: "#adefd1ff", color: "black", fontWeight: "bold"
+                        }}
+                        class="product-to-cart">View Cart</button>
                 </Link>
-
             </>
         )
     }
     return (
         <>
             <button
-                class="add-to-cart"
+                class="product-to-cart"
                 type="button"
+                style={{ backgroundColor: "#00203fff", color: "white", fontWeight: "bold" }}
                 onClick={() => {
                     cartDispatch({
                         query: "ADD_TO_CART",

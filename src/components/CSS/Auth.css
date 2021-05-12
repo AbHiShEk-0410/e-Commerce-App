@@ -108,7 +108,7 @@ body {
   background-color: var(--secondary-color);
   border-radius: var(--button-radius);
   border-color: transparent;
-  font-weight: bold;
+  font-weight: bold;    margin: 4rem 2rem 0rem 2rem;
   margin-bottom: 1rem;
   cursor: pointer;
 }
@@ -124,4 +124,8 @@ body {
     margin-bottom: 3rem;
     max-width: 80%;
   }
+  .signup-page{
+    padding:1rem 0rem;
+  }
 }
+

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CSS/product.css"
 import { data, checkItemInObject, SortFilter, CartButtonHandler } from "../utilities";
 import { useCart, useWishlist, useSortFilter } from "../contexts";
-
+import { useState } from "react"
 export default function Product() {
   const { wishlistState, wishlistDispatch } = useWishlist();
   const { cartState, cartDispatch } = useCart();
@@ -17,7 +17,8 @@ export default function Product() {
     showFastDelivery,
     showFastDelivery
   );
- 
+  const [toggle, setToggle] = useState(false);
+
   return (
     <>
       <fieldset>
@@ -71,10 +72,10 @@ export default function Product() {
           Fast Delivery Only
         </label>
       </fieldset>
-      <div class="parent">
+      <div class="product-listing">
         {listItems.map((itemInProduct) => (
-          <div class="second-parent" key={itemInProduct.id}>
-            <img class="image" src={itemInProduct.image} alt="img"></img>
+          <div class="product" key={itemInProduct.id}>
+            <img class="product-image" src={itemInProduct.image} alt="img"></img>
             <h1>{itemInProduct.name}</h1>
             <strong>{itemInProduct.origin}</strong>
             <strong>{itemInProduct.type}</strong>
@@ -84,8 +85,8 @@ export default function Product() {
             <strong>{itemInProduct.offer}</strong>
             <p>{itemInProduct.delivery}</p>
             {CartButtonHandler(checkItemInObject(cartState.idInCart, itemInProduct), itemInProduct)}
-            <div class="wishlist-button"><FontAwesomeIcon icon={faHeart} /></div>
             <button
+              class="product-to-wishlist"
               onClick={() =>
                 wishlistDispatch({
                   query: checkItemInObject(

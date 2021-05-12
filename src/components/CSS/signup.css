@@ -18,19 +18,17 @@ body {
   background: var(--ternary-white);
 }
 .signup-page {
-  position: absolute;
-  margin: 1% auto;
-  left: 5%;
+  margin: auto;
+  height: 90%;
   width: 90%;
   padding: 6rem 0rem;
-  flex-wrap: wrap;
-  top: 1%;
+  align-self: center;
   box-shadow: 0px 0px 11px 4px #888888;
 }
 .signup-content {
   display: flex;
   flex-wrap: wrap;
-  padding:30px;
+  padding: 30px;
   align-items: center;
   justify-content: space-around;
 }
@@ -41,7 +39,8 @@ body {
   width: 100%;
 }
 .signup-card {
-  width: 26rem;
+  border: 1px solid red;
+  width: 29rem;
   height: 100%;
   padding: 1rem;
   display: flex;
@@ -102,7 +101,6 @@ a {
 }
 @media only screen and (max-width: 1062px) {
   .signup-card {
-    margin: 4rem 2rem 0rem 2rem;
-    max-width: 80%;
+    margin: 4rem 1rem 0rem 1rem;
   }
 }

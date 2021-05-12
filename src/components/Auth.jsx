@@ -1,5 +1,7 @@
 import { useAuth } from "../contexts";
 import { useState, useEffect } from "react";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./CSS/Auth.css"
 
 export default function Auth() {
