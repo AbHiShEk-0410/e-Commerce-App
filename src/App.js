@@ -2,15 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import { Product, Wishlist, Login, Cart, Loader, Signup, PrivateRoute } from "./components";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { useLogin } from "./contexts";
 function Forbidden() {
   return <h1>Nothing like that existss</h1>;
 }
 export default function App() {
 
-  const [hideNav, setHideNav] = useState(false);
   const { login, setLogin, loader } = useLogin();
+  console.log(login)
+  let navigate = useNavigate();
+  console.log(login)
 
   return (
     <div className="App">
@@ -29,6 +31,42 @@ export default function App() {
         | {login === false && <Link to="/login">Login</Link>}
         {login && <button onClick={() => setLogin(false)}>Logout</button>}
       </nav> */}
+      <nav>
+        <Link to="/">
+          {" "}
+          Home{" "}
+        </Link>{" "}
+        ||
+        <Link to="/category">
+          {" "}
+          Category{" "}
+        </Link>{" "}
+        ||
+        <Link
+          to="/cart"
+        >
+          Cart{" "}
+        </Link>{" "}
+        ||
+        <Link
+
+          to="/wishlist"
+        >
+          WishList |
+        </Link>
+        {login === false && <Link to="/login">Login</Link>}
+        {login === true && (
+          <button
+            onClick={() => {
+              setLogin(false);
+              navigate("/login");
+              localStorage.clear();
+            }}
+          >
+            Logout
+          </button>
+        )}
+      </nav>
 
       {loader && <Loader />}
       <Routes>
@@ -39,7 +77,7 @@ export default function App() {
           <Cart />
         </PrivateRoute>
         <PrivateRoute path="/wishlist">
-          <Wishlist />
+          element = {<Wishlist />}
         </PrivateRoute>
         <Route path="/login">
           <Login />

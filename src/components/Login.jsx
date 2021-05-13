@@ -7,7 +7,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-export default function Auth() {
+export default function Login() {
   const navigate = useNavigate();
   const { login, setLogin, setLoader } = useLogin();
   const [userDetails, setUserDetails] = useState({});
@@ -29,7 +29,7 @@ export default function Auth() {
   return (
     <div className="login">
 
-      {/* Brading */}
+      {/* Branding */}
       <div className="brand">
         <h1 className="brand-name">Bakeful</h1>
         <p>
@@ -55,9 +55,9 @@ export default function Auth() {
             </input>
             <input className="login-button" type="submit" value="Log In"></input>
           </form>
-          <a className="forgot-password" href="#">
+          <p className="forgot-password" href="#">
             Forgotten password?
-            </a>
+            </p>
         </div>
         <div className="separator">
           <hr />
