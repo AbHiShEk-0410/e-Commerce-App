@@ -12,11 +12,11 @@ function loginMiddleware(request, response, next) {
         const userInfo = findUserInDb({
             username
         })
-        userInfo === {} ? request.user = {
+        userInfo === undefined ? request.loginUser = {
             success: false,
             status: 404,
             message: "User does not exist"
-        } : request.user = {
+        } : request.loginUser = {
             success: true,
             userInfo
         }
@@ -24,16 +24,16 @@ function loginMiddleware(request, response, next) {
         const userInfo = findUserInDb({
             email
         })
-        userInfo === undefined ? request.user = {
+        userInfo === undefined ? request.loginUser = {
             success: false,
             status: 404,
             message: "User does not exist"
-        } : request.user = {
+        } : request.loginUser = {
             success: true,
             userInfo: userInfo
         }
     } else {
-        request.user = {
+        request.loginUser = {
             success: false,
             status: 400,
             message: "Missing Parameters"
