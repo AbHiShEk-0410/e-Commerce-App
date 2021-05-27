@@ -1,4 +1,7 @@
-const {loginMiddleware} = require("./loginMiddleware")
+const { loginMiddleware } = require("./loginMiddleware")
+const { emailValidation, signupParamsCheck } = require("./singupMiddleware")
 module.exports = {
-	loginParamCheck : loginMiddleware
+	loginParamCheck: loginMiddleware,
+	emailValidation,
+	signupParamsCheck
 }
