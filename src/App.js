@@ -10,9 +10,7 @@ function Forbidden() {
 export default function App() {
 
   const { login, setLogin, loader } = useLogin();
-  console.log(login)
   let navigate = useNavigate();
-  console.log(login)
 
   return (
     <div className="App">

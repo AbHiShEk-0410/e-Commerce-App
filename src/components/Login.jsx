@@ -1,30 +1,48 @@
 import "./CSS/Login.css"
+import axios from "axios";
 import { useLogin } from "../contexts";
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { emailUsernameChecker } from "../utilities"
 
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { login, setLogin, setLoader } = useLogin();
   const [userDetails, setUserDetails] = useState({});
-  const { state } = useLocation();
-
+  const [loginParams, setLoginParams] = useState(undefined);
+  const { login, setLogin, setLoader } = useLogin()
+  let checkerResponse = false;
+  console.log(loginParams)
   useEffect(() => {
     setLogin(JSON.parse(localStorage.getItem("Login")));
   }, [login]);
 
-  async function useValidation() {
-    setLoader(true);
-    if (userDetails.user === "Joy" && userDetails.password === "Password") {
+  useEffect(() => {
+    checkerResponse = emailUsernameChecker(userDetails);
+    if (checkerResponse.success) {
+      setLoginParams(true)
+    }
+    else {
+      setLoginParams(false)
+    }
+  }, [userDetails])
+
+  async function validation(e) {
+    e.preventDefault();
+    try {
+      let loginResponse = await axios.post("https://database-1.joygupta1.repl.co/login", {
+        [checkerResponse.type]: userDetails.user,
+        password: userDetails.password
+      })
       setLogin(true);
       localStorage.setItem("Login", JSON.stringify("true"));
-      navigate(state === null ? "/" : state.from);
+
     }
-    setLoader(false);
+    catch ({ response }) {
+      console.log(response.data)
+    }
   }
   return (
     <div className="login">
@@ -41,8 +59,8 @@ export default function Login() {
       {/* Actual Login */}
       <div className="login-card">
         <div>
-          <form className="login-form" onSubmit={useValidation}>
-            <input
+          <form className="login-form" onSubmit={validation}>
+            <input class="user-input"
               onChange={(event) =>
                 setUserDetails({ ...userDetails, user: event.target.value })
               }
@@ -53,17 +71,25 @@ export default function Login() {
               }
               placeholder="Password" type="password">
             </input>
-            <input className="login-button" type="submit" value="Log In"></input>
+            <input disabled={!loginParams} className="login-button" type="submit" value="Log In"></input>
           </form>
-          <p className="forgot-password" href="#">
-            Forgotten password?
-            </p>
+
+          <Link to={{
+            pathname: "/login",
+            search: "?forgot-password=true"
+          }}><p className="forgot-password" href="#">
+              Forgotten password?
+            </p></Link>
         </div>
         <div className="separator">
           <hr />
         </div>
         <div>
-          <button className="signup-button">Create an account</button>
+          <Link to={{
+            pathname: "/signup"
+          }}>
+            <button className="signup-button">Create an account</button>
+          </Link>
         </div>
       </div>
     </div>
