@@ -7,4 +7,4 @@ export default function PrivateRoute({ path, ...props }) {
     ) : (
         <Navigate state={{ from: path }} replace to="/login"></Navigate>
     )
-}    
+}

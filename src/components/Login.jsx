@@ -2,7 +2,7 @@ import "./CSS/Login.css"
 import axios from "axios";
 import { useLogin } from "../contexts";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { emailUsernameChecker } from "../utilities"
 
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -10,9 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export default function Login() {
+  const { state } = useLocation();
   const [userDetails, setUserDetails] = useState({});
   const [loginParams, setLoginParams] = useState(undefined);
   const { login, setLogin, setLoader } = useLogin()
+  const navigate = useNavigate();
+  console.log(login)
   let checkerResponse = false;
   useEffect(() => {
     setLogin(JSON.parse(localStorage.getItem("Login")));
@@ -28,16 +31,17 @@ export default function Login() {
     }
   }, [userDetails])
 
-  async function validation(e) {
+  async function Signup(e) {
     e.preventDefault();
     try {
       let loginResponse = await axios.post("https://database-1.joygupta1.repl.co/login", {
         [checkerResponse.type]: userDetails.user,
         password: userDetails.password
       })
+      console.log(loginResponse)
       setLogin(true);
       localStorage.setItem("Login", JSON.stringify("true"));
-
+      navigate(state === null ? "/" : state.from);
     }
     catch ({ response }) {
       console.log(response.data)
@@ -58,7 +62,7 @@ export default function Login() {
       {/* Actual Login */}
       <div className="login-card">
         <div>
-          <form className="login-form" onSubmit={validation}>
+          <form className="login-form" onSubmit={Signup}>
             <input class="user-input"
               onChange={(event) =>
                 setUserDetails({ ...userDetails, user: event.target.value })

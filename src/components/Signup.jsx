@@ -1,4 +1,4 @@
-import "./CSS/signup.css"
+import "./CSS/Signup.css"
 import signup_banner from "../images/singup_banner.png"
 import front_logo from "../images/front-logo.png"
 import { useState, useEffect } from "react";

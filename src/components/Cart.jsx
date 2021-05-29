@@ -1,22 +1,23 @@
 import { useCart, useWishlist } from "../contexts";
 import { useEffect, useState } from "react";
 import { checkItemInObject } from "../utilities";
+import {useLogin} from "../contexts"
 
 export default function Cart() {
     const { cartState, cartDispatch } = useCart();
     const { wishlistState, wishlistDispatch } = useWishlist();
     const [balance, setBalance] = useState(0);
-    function useTotalPriceCalculator() {
-        useEffect(() => {
-            setBalance(
-                cartState.cartItems.reduce(
-                    (total, item) => total + item.quantity * item.price,
-                    0
-                )
-            );
-        });
-    }
-    useTotalPriceCalculator();
+    const {login} = useLogin();
+
+    useEffect(() => {
+        setBalance(
+            cartState.cartItems.reduce(
+                (total, item) => total + item.quantity * item.price,
+                0
+            )
+        );
+    });
+
 
     return (
         <div>
