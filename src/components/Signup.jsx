@@ -2,6 +2,7 @@ import "./CSS/signup.css"
 import signup_banner from "../images/singup_banner.png"
 import front_logo from "../images/front-logo.png"
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { checkSignupParams } from "../utilities"
 import axios from "axios";
 export default function Signup() {
@@ -13,8 +14,6 @@ export default function Signup() {
     });
     const [signupParamsOK, setSignupParamsOK] = useState(false);
     let checkerResponse;
-    console.log("signup Params ",signupParamsOK)
-    console.log(signupParamsOK)
 
     useEffect(() => {
         checkerResponse = checkSignupParams(userDetails)
@@ -41,7 +40,6 @@ export default function Signup() {
             console.log(response.data)
         }
     }
-
     return (
 
         <div className="signup-page">
@@ -77,8 +75,10 @@ export default function Signup() {
                             <input disabled={!signupParamsOK} className="login-button" type="submit" value="Sign Up"></input>
                         </form>
                         <p style={{ color: "#b3a2a2" }}>Already have an account? {" "}
-                            <a className="forgot-password" href="#">
-                                Log In</a>
+                            <Link to={{
+                                pathname: "/login"
+                            }}> <a className="forgot-password" href="#">
+                                    Log In</a></Link>
                         </p>
                     </div>
                 </div>

@@ -14,7 +14,6 @@ export default function Login() {
   const [loginParams, setLoginParams] = useState(undefined);
   const { login, setLogin, setLoader } = useLogin()
   let checkerResponse = false;
-  console.log(loginParams)
   useEffect(() => {
     setLogin(JSON.parse(localStorage.getItem("Login")));
   }, [login]);
