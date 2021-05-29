@@ -2,7 +2,7 @@ import { useState, useContext, createContext } from "react";
 const LoginContext = createContext();
 
 export function LoginProvider({ children }) {
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState(JSON.parse(localStorage.getItem("Login")));
     const [loader, setLoader] = useState(false);
 
     return (
