@@ -1,42 +1,48 @@
+import "./CSS/Navbar.css"
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLogin } from "../contexts";
 import {
     faUser,
     faShoppingCart,
     faHeart,
-    faHome,
+    faBox,
+    faBoxOpen,
     faPowerOff,
     faUserEdit
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from "../images/front-logo.png"
-import "./CSS/Navbar.css"
-import { useLogin } from "../contexts";
 
 export default function Home() {
     const { login, setLogin } = useLogin();
     const navigate = useNavigate();
+    const { pathname } = useLocation();
     return (
         <div>
             <nav className="top-nav">
                 <div>
-                    <div className="linear-div left-nav-content">
-                        <h1>Bakeful</h1>
-                        <img className="" width="15%" src={logo}></img>
-                    </div>
+                    <Link className="Link" to={{
+                        pathname: "/"
+                    }}>
+                        <div className="linear-div left-nav-content">
+                            <h1 >Bakeful</h1>
+                            <img className="" width="35%" src={logo}></img>
+                        </div>
+                    </Link>
                 </div>
                 <div>
                     <div className="linear-div right-nav-content">
-                        <Link to={{
-                            pathname: "/home"
+                        <Link className="Link" to={{
+                            pathname: "/product"
                         }}>
                             <div className="router">
-                                <h3 className="router-heading">Home</h3>
+                                <h3 className="router-heading">Product</h3>
                                 <span className="router-icon">
-                                    <FontAwesomeIcon icon={faHome} />
+                                    <FontAwesomeIcon icon={pathname === "/product" ? faBoxOpen : faBox} />
                                 </span>
                             </div>
                         </Link>
-                        <Link to={{
+                        <Link className="Link" to={{
                             pathname: "/cart"
                         }}>
                             <div className="router">
@@ -47,7 +53,7 @@ export default function Home() {
                             </div>
                         </Link>
 
-                        <Link to={{
+                        <Link className="Link" to={{
                             pathname: "/wishlist"
                         }}>
                             <div className="router">
@@ -58,34 +64,35 @@ export default function Home() {
                             </div>
 
                         </Link>
-                        <Link to={{
+                        <Link style={{ display: !login ? "" : "none" }} className="Link" to={{
                             pathname: "/login"
                         }}>
-                            <div style={{ display : !login ? "" : "none" }} className="router">
+                            <div className="router">
                                 <h3 className="router-heading">Login</h3>
                                 <span className="router-icon">
                                     <FontAwesomeIcon icon={faUser} />
                                 </span>
                             </div>
                         </Link>
-                        <div style={{ display : login ? "inherit" : "none" }} className="profile router">
+                        <div style={{ display: login ? "inherit" : "none" }} className="user-setting router">
                             <h3 className="router-heading">User</h3>
                             <span className="router-icon">
                                 <FontAwesomeIcon icon={faUser} />
                             </span>
-                            <ul  className="drop-down-menu">
-                                <Link to={{
-                                    pathname: "/profile"
-                                }}>
-                                    <li className="drop-down-link">
+                            <ul className="drop-down-setting">
+                                <li className="drop-down-link">
+                                    <Link style={{ width: "100%" }} className="Link" to={{
+                                        pathname: "/profile"
+                                    }}>
                                         <div className="router">
                                             <h3 className="router-heading">Profile</h3>
                                             <span>
                                                 <FontAwesomeIcon icon={faUserEdit} />
                                             </span>
                                         </div>
-                                    </li>
-                                </Link>
+                                    </Link>
+                                </li>
+
                                 <li className="drop-down-link">
                                     <div onClick={() => {
                                         setLogin(false);
