@@ -16,7 +16,7 @@ export default function App() {
       <Navbar/>
       {loader && <Loader />}
       <Routes>
-        <Route exact path="/">
+        <Route path="/product">
           <Product />
         </Route>
         <PrivateRoute path="/cart">

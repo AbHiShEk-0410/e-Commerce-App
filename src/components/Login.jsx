@@ -41,7 +41,7 @@ export default function Login() {
       console.log(loginResponse)
       setLogin(true);
       localStorage.setItem("Login", JSON.stringify("true"));
-      navigate(state === null ? "/" : state.from);
+      navigate(state === null ? "/product" : state.from);
     }
     catch ({ response }) {
       console.log(response.data)
