@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
-import { Product, Wishlist, Login, Cart, Loader, Signup, PrivateRoute, Navbar } from "./components";
+import { Product, Wishlist, Login, Cart, Loader, Signup, PrivateRoute, Navbar, Error404 } from "./components";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { useLogin } from "./contexts";
 function Forbidden() {
@@ -9,11 +9,11 @@ function Forbidden() {
 }
 export default function App() {
 
-  const {loader } = useLogin();
-  
+  const { loader } = useLogin();
+
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       {loader && <Loader />}
       <Routes>
         <Route path="/product">
@@ -32,7 +32,7 @@ export default function App() {
           <Signup />
         </Route>
         <Route path="/*">
-          <Forbidden />
+          <Error404 />
         </Route>
       </Routes>
     </div>
