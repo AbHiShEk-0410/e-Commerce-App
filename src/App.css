@@ -1,41 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,100;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --primary-color: #0b002a;
+  --secondary-color: #faf8f4;
+  --ternary-color: #ff6994;
+  --border-color: #b3a2a2;
+  --background-color:white;
+  --font-color:black;
+  --primary-background-color: rgb(255, 126, 131);
+  --primary-backrground-gradient: linear-gradient(
+    180deg,
+    rgba(255, 126, 131, 1) 0%,
+    rgba(254, 120, 136, 1) 50%,
+    rgba(255, 105, 148, 1) 100%
+  );
+  --secondary-background-color: rgb(74, 50, 172);
+  --secondary-background-gradient: linear-gradient(
+    145deg,
+    rgba(74, 50, 172, 1) 0%,
+    rgba(117, 66, 179, 1) 50%,
+    rgba(191, 106, 198, 1) 100%
+  );
+  --soft-border-radius:8px;
+  --soft-margin-gap:5px;
+  --hard-margin-gap:10px;
+  --harder-margin-gap:1rem;
+  --primary-heading-font: "Roboto", sans-serif;
+  --qoute-font: "Work Sans", sans-serif;
+  --card-tile-font: "Poppins", sans-serif;
+  --primary-button-radius: 0.3rem;
+  --primary-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+::after,
+::before,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 .App {
+  font-family: sans-serif;
   text-align: center;
 }
-body{
-  min-width: 12fr;
-
-}
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  background-color: white;
 }
