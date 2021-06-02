@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts";
+import { FiShoppingCart } from 'react-icons/fi';
 export default function CartButtonHandler(isItemInCart, itemInProduct) {
     const { cartDispatch } = useCart();
     if (isItemInCart) {
@@ -7,10 +8,10 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
             <>
                 <Link to="/cart">
                     <button
-                        style={{
-                            backgroundColor: "#adefd1ff", color: "black", fontWeight: "bold"
-                        }}
-                        class="product-to-cart">View Cart</button>
+                        class="from-product view-cart ">
+                        <FiShoppingCart />
+                        {" "}
+                            View Cart</button>
                 </Link>
             </>
         )
@@ -18,9 +19,8 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
     return (
         <>
             <button
-                class="product-to-cart"
+                class="from-product to-cart"
                 type="button"
-                style={{ backgroundColor: "#00203fff", color: "white", fontWeight: "bold" }}
                 onClick={() => {
                     cartDispatch({
                         query: "ADD_TO_CART",
@@ -28,7 +28,7 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
                     });
                 }}
             >
-                Add to Cart
+                + {" "}Add to Cart
             </button>
         </>
     )

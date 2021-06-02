@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,100;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 :root {
   --primary-color: #0b002a;
   --secondary-color: #faf8f4;
@@ -9,6 +9,7 @@
   --border-color: #b3a2a2;
   --background-color:white;
   --font-color:black;
+  --gray:#404040;
   --primary-background-color: rgb(255, 126, 131);
   --primary-backrground-gradient: linear-gradient(
     180deg,
@@ -30,6 +31,7 @@
   --primary-heading-font: "Roboto", sans-serif;
   --qoute-font: "Work Sans", sans-serif;
   --card-tile-font: "Poppins", sans-serif;
+  --price-font:"Rubik", sans-serif;
   --primary-button-radius: 0.3rem;
   --primary-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
