@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 :root {
-  --primary-color: #0b002a;
+	--primary-color: #00203fff;
   --secondary-color: #faf8f4;
   --ternary-color: #ff6994;
   --border-color: #b3a2a2;
@@ -12,17 +12,17 @@
   --gray:#404040;
   --primary-background-color: rgb(255, 126, 131);
   --primary-backrground-gradient: linear-gradient(
-    180deg,
-    rgba(255, 126, 131, 1) 0%,
-    rgba(254, 120, 136, 1) 50%,
-    rgba(255, 105, 148, 1) 100%
+	180deg,
+	rgba(255, 126, 131, 1) 0%,
+	rgba(254, 120, 136, 1) 50%,
+	rgba(255, 105, 148, 1) 100%
   );
   --secondary-background-color: rgb(74, 50, 172);
   --secondary-background-gradient: linear-gradient(
-    145deg,
-    rgba(74, 50, 172, 1) 0%,
-    rgba(117, 66, 179, 1) 50%,
-    rgba(191, 106, 198, 1) 100%
+	145deg,
+	rgba(74, 50, 172, 1) 0%,
+	rgba(117, 66, 179, 1) 50%,
+	rgba(191, 106, 198, 1) 100%
   );
   --soft-border-radius:8px;
   --soft-margin-gap:5px;
@@ -34,7 +34,7 @@
   --price-font:"Rubik", sans-serif;
   --primary-button-radius: 0.3rem;
   --primary-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 ::after,
 ::before,
