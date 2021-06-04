@@ -16,7 +16,7 @@ signupRoute.post(
 		if (isUserUnique.success && isUserUnique.result) {
 			const { name, email, password, question, answer } = request.body;
 			const encryptedPassword = await encrypt(password);
-            const encryptedAnswer = await encrypt(answer);
+			const encryptedAnswer = await encrypt(answer);
 
 			if (encryptedPassword.success && encryptedAnswer.success) {
 				users.push({
@@ -26,7 +26,7 @@ signupRoute.post(
 					email,
 					password: encryptedPassword.hash,
 					question,
-					answer : encryptedAnswer.hash,
+					answer: encryptedAnswer.hash,
 					wishlist: [],
 					cart: [],
 				});
@@ -34,10 +34,14 @@ signupRoute.post(
 					success: true,
 					message: "User has been registered to our database",
 				});
-			} else {
+			} else if (!encryptedPassword.success) {
 				response
 					.status(500)
 					.send({ success: false, message: encryptedPassword.message });
+			} else {
+				response
+					.status(500)
+					.send({ success: false, message: encryptedAnswer.message });
 			}
 		} else if (isUserUnique.success && !isUserUnique.result) {
 			response

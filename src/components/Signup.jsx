@@ -6,26 +6,14 @@ import { Link } from "react-router-dom";
 import { checkSignupParams } from "../utilities";
 import axios from "axios";
 export default function Signup() {
-	const [userDetails, setUserDetails] = useState({
-		name: undefined,
-		email: undefined,
-		password: undefined,
-		confirmPassword: undefined,
-	});
+	const [userDetails, setUserDetails] = useState({});
 	const [signupParamsOK, setSignupParamsOK] = useState(false);
-	let checkerResponse;
 	useEffect(() => {
-		checkerResponse = checkSignupParams(userDetails);
-		if (checkerResponse.success) {
-			setSignupParamsOK(true);
-		} else {
-			setSignupParamsOK(false);
-		}
+		setSignupParamsOK(checkSignupParams(userDetails).success);
 	}, [userDetails]);
 
 	async function userSignup(event) {
 		event.preventDefault();
-		console.log("here");
 		try {
 			const serverResponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/signup",
@@ -33,11 +21,12 @@ export default function Signup() {
 					name: userDetails.name,
 					email: userDetails.email,
 					password: userDetails.password,
+					question: userDetails.question,
+					answer: userDetails.answer,
 				}
 			);
-			console.log("success", serverResponse);
 		} catch ({ response }) {
-			console.log(response.data);
+			console.log(response.data.message);
 		}
 	}
 	return (
@@ -103,18 +92,13 @@ export default function Signup() {
 								onChange={(event) =>
 									setUserDetails({
 										...userDetails,
-										password: event.target.value,
+										question: event.target.value,
 									})
 								}
 								placeholder="Password"
 								type="password"
 							>
-								<option
-									value=""
-									disabled
-									selected
-									hidden
-								>
+								<option value="" disabled selected hidden>
 									Select security question...
 								</option>
 								<option value="What is your pet name?">
@@ -134,7 +118,7 @@ export default function Signup() {
 								onChange={(event) =>
 									setUserDetails({
 										...userDetails,
-										confirmPassword: event.target.value,
+										answer: event.target.value,
 									})
 								}
 								placeholder="Question's answer"
