@@ -1,106 +1,127 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,800&display=swap");
-:root {
-  --primary-color: #00203fff;
-  --secondary-color: #adefd1ff;
-  --secondary-dark-color: rgb(129, 241, 191);
-  --ternary-white: rgba(224, 224, 224, 0);
-  --secondary-black: #b3a2a2;
-  --button-radius: 0.4rem;
-}
-::after,
-::before,
-* {
-  padding: 0;
-  cursor: default;
-  box-sizing: border-box;
-}
 body {
-  background: var(--ternary-white);
+	background-color: white;
 }
 .signup-page {
-  margin: auto;
-  margin-top:1rem;
-  height: 90%;
-  width: 90%;
-  padding: 6rem 0rem;
-  align-self: center;
-  box-shadow: 0px 0px 11px 4px #888888;
+	margin: auto;
+	margin-top: 1rem;
+	width: 90%;
+	align-self: center;
+	padding: 10px;
+	box-shadow: 0px 0px 11px 4px #888888;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .signup-content {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 30px;
-  align-items: center;
-  justify-content: space-around;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 20px;
+	justify-content: space-around;
+	height: 100%;
 }
 .signup-banner {
-  width: 30rem;
+	width: 35%;
 }
 .signup-banner img {
-  width: 100%;
+	width: 100%;
 }
 .signup-card {
-  width: 29rem;
-  height: 100%;
-  padding: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+	width: 34%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	
 }
 .logo {
-  display: flex;
+	display: flex;
 }
 .logo img {
-  height: 2.5rem;
-  width: auto;
+	height: 3rem;
+	width: auto;
 }
 .logo h3 {
-  font-family: "Raleway", sans-serif;
-  font-size: 30px;
-  font-weight: bold;
-  color: var(--primary-color);
+	font-family: var(--italic-heading);
+	font-size: 40px;
+	font-weight: bold;
+	color: var(--primary-color);
 }
 .welcome-note {
-  text-align-last: left;
-  color: var(--secondary-color);
+	text-align-last: left;
+	color: var(--ternary-color);
 }
 .tag-line {
-  text-align: left;
-  font-style: italic;
-  color: var(--secondary-black);
+	text-align: left;
+	font-style: italic;
+	color: var(--grayish-black);
 }
 .signup-inputs {
-  display: flex;
-  flex-direction: column;
-  height: 20rem;
-  width: 100%;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	justify-content: space-between;
 }
 .signup-form {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 90%;
 }
 .signup-form input {
-  border-radius: var(--button-radius);
-  border: 1px solid var(--secondary-black);
-  padding: 0.8rem;
-  font-size: 17px;
-  justify-content: space-evenly;
+	border-radius: var(--soft-border-radius);
+	border: 1px solid var(--grayish-black);
+	padding: 0.8rem;
+	font-size: 17px;
+	margin: 5px 0 5px 0;
+	justify-content: space-evenly;
 }
 .tag-line:hover {
-  color: black;
+	color: black;
+}
+.security-ques {
+	padding: 0.8rem;
+	font-size: 17px;
+	font: inherit;
+	border-radius: var(--soft-border-radius);
+	background-color: white;
 }
 input {
-  cursor: auto;
+	cursor: auto;
 }
 a {
-  cursor: pointer;
+	cursor: pointer;
 }
-@media only screen and (max-width: 1062px) {
-  .signup-card {
-    margin: 4rem 1rem -1rem 1rem;
-  }
+
+@media only screen and (max-width: 1264px) {
+	.signup-content {
+		flex-direction: column;
+	}
+	.signup-banner {
+		margin-top: 10px;
+		max-width: 100%;
+	}
+	.signup-card {
+		margin-top: 30px;
+		height: 50%;
+		width: 100%;
+	}
+	.signup-form {
+		width: 100%;
+	}
+	.signup-form input {
+		width: 100%;
+	}
+	.signup-inputs {
+		margin-left: 10px;
+		max-width: 100%;
+	}
+	.signup-card .logo .welcome-note .tag-line {
+		align-self: center;
+	}
 }
