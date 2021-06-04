@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 :root {
 	--primary-color: #00203fff;
 	--secondary-color: #faf8f4;
@@ -27,14 +27,19 @@
 		rgba(191, 106, 198, 1) 100%
 	);
 	--soft-border-radius: 8px;
+	--hard-border-radius: 12px;
 	--soft-margin-gap: 5px;
 	--hard-margin-gap: 10px;
 	--harder-margin-gap: 1rem;
+	--soft-padding-gap: 5px;
+	--hard-padding-gap: 10px;
+	--harder-padding-gap: 1rem;
 	--primary-heading-font: "Roboto", sans-serif;
 	--qoute-font: "Work Sans", sans-serif;
 	--card-tile-font: "Poppins", sans-serif;
 	--italic-heading: "Raleway", sans-serif;
 	--price-font: "Rubik", sans-serif;
+	--calm-font: "Quicksand", sans-serif;
 	--primary-button-radius: 0.3rem;
 	--primary-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
 		rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -52,4 +57,21 @@
 }
 body {
 	background: var(--secondary-color);
+}
+.primary-button {
+	background: var(--primary-color);
+	color: white;
+	font-family: var(--card-tile-font);
+	font-size: large;
+	font-weight: bold;
+	border: 1px solid var(--primary-color);
+	border-radius: var(--soft-border-radius);
+}
+.secondary-button{
+	background:white;
+	color:var(--ternary-color);
+	border:1px solid transparent;
+	font-family: var(--card-tile-font);
+	font-size: large;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }

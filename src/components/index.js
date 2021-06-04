@@ -4,6 +4,7 @@ export { default as Loader } from "./Loader";
 export { default as Product } from "./Product";
 export { default as Wishlist } from "./Wishlist";
 export { default as Signup } from "./Signup";
-export { default as PrivateRoute } from "./PrivateRoute"
+export { default as PrivateRoute } from "./PrivateRoute";
 export { default as Navbar } from "./Navbar";
 export { default as Error404 } from "./Error404";
+export { default as ForgotPassword } from "./ForgotPassword";
