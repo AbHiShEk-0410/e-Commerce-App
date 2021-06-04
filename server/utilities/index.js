@@ -1,8 +1,8 @@
-const { encryptPassword } = require("./encryptPassword")
+const { encryption : encrypt } = require("./encryption")
 const { findUserInDb } = require("./findUserInDb")
 const { passwordValidation } = require("./passwordValidation")
 module.exports = {
-	encryptPassword,
+	encrypt,
 	findUserInDb,
 	passwordValidation
 }
