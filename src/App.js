@@ -16,6 +16,7 @@ import { useLogin } from "./contexts";
 
 export default function App() {
 	const { loader } = useLogin();
+	console.log("App")
 
 	return (
 		<div className="App">
@@ -28,7 +29,9 @@ export default function App() {
 				<PrivateRoute path="/cart">
 					<Cart />
 				</PrivateRoute>
-				<PrivateRoute path="/wishlist">element = {<Wishlist />}</PrivateRoute>
+				<PrivateRoute path="/wishlist">
+					<Wishlist />
+				</PrivateRoute>
 				<Route path="/login">
 					<Login />
 				</Route>
@@ -38,10 +41,8 @@ export default function App() {
 				<Route path="/*">
 					<Error404 />
 				</Route>
-				<Route path="/login/forgot-password">
-					<ForgotPassword />
-				</Route>
 			</Routes>
+			<ForgotPassword />
 		</div>
 	);
 }

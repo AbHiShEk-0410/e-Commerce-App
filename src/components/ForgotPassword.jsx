@@ -1,11 +1,67 @@
-import { useState } from "react";
+import { useLocation, Route, Routes, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import "./CSS/forgot-password.css";
 export default function ForgotPassword() {
-	const [recoveryTab, setRecoveryTab] = useState("RecoveryFirst");
+	console.log("Forgot");
+	const location = useLocation();
+	const navigate = useNavigate();
+	console.log(location);
+	const FirstContainer = {
+		hidden: {
+			opacity: 0,
+			x: "100vw",
+		},
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: { type: "spring", delay: 0.5 },
+		},
+		exit: {
+			x: "-100vh",
+			transition: { ease: "easeInOut" },
+		},
+	};
+	const SecondContainer = {
+		hidden: {
+			opacity: 0,
+			x: "100vw",
+		},
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: { type: "spring", delay: 0.5 },
+		},
+		exit: {
+			x: "-100vh",
+			transition: { ease: "easeInOut" },
+		},
+	};
+	const ThirdContainer = {
+		hidden: {
+			opacity: 0,
+			x: "100vw",
+		},
+		visible: {
+			opacity: 1,
+			x: 0,
+			transition: { type: "spring", delay: 0.5 },
+		},
+		exit: {
+			x: "-100vh",
+			transition: { ease: "easeInOut" },
+		},
+	};
+
 	function RecoveryFirst() {
 		return (
 			<div className="recovery-parent">
-				<div className="recovery-tile">
+				<motion.div
+					variants={FirstContainer}
+					initial="hidden"
+					animate="visible"
+					exit="exit"
+					className="recovery-tile"
+				>
 					<div className="recovery-details">
 						<h1>Recover Your Account</h1>
 						<div className="hr-div"></div>
@@ -22,21 +78,27 @@ export default function ForgotPassword() {
 					<div className="hr-div"></div>
 					<div className="recovery-navigator">
 						<button
-							onClick={() => setRecoveryTab("RecoverySecond")}
+							onClick={() => navigate("/forgot-password/user/123")}
 							className="primary-button"
 						>
 							Search
 						</button>
 						<button className="secondary-button">Cancel</button>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		);
 	}
 	function RecoverySecond() {
 		return (
 			<div className="recovery-parent">
-				<div className="recovery-tile">
+				<motion.div
+					className="recovery-tile"
+					variants={SecondContainer}
+					initial="hidden"
+					animate="visible"
+					exit="exit"
+				>
 					<div className="recovery-details">
 						<h1>
 							Please Verify Its You!
@@ -52,21 +114,27 @@ export default function ForgotPassword() {
 					<div className="hr-div"></div>
 					<div className="recovery-navigator">
 						<button
-							onClick={() => setRecoveryTab("RecoveryThird")}
+							onClick={() => navigate("/forgot-password/reset")}
 							className="primary-button"
 						>
 							Verify
 						</button>
 						<button className="secondary-button">Cancel</button>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		);
 	}
 	function RecoveryThird() {
 		return (
 			<div className="recovery-parent">
-				<div className="recovery-tile">
+				<motion.div
+					className="recovery-tile"
+					variants={ThirdContainer}
+					initial="hidden"
+					animate="visible"
+					exit="exit"
+				>
 					<div className="recovery-details">
 						<h1>
 							We Got You
@@ -88,23 +156,33 @@ export default function ForgotPassword() {
 					<div className="hr-div"></div>
 					<div className="recovery-navigator">
 						<button
-							onClick={() => setRecoveryTab("RecoveryFirst")}
+							onClick={() => navigate("/forgot-password")}
 							className="primary-button"
 						>
 							Change
 						</button>
 						<button className="secondary-button">Cancel</button>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		);
 	}
 
 	return (
 		<>
-			{recoveryTab === "RecoveryFirst" && <RecoveryFirst />}
-			{recoveryTab === "RecoverySecond" && <RecoverySecond />}
-			{recoveryTab === "RecoveryThird" && <RecoveryThird />}
+			<AnimatePresence exitBeforeEnter>
+				<Routes location={location} key={location.key}>
+					<Route path="/forgot-password">
+						<RecoveryFirst />
+					</Route>
+					<Route path="/forgot-password/user/:id">
+						<RecoverySecond />
+					</Route>
+					<Route path="/forgot-password/reset">
+						<RecoveryThird />
+					</Route>
+				</Routes>
+			</AnimatePresence>
 		</>
 	);
 }
