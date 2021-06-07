@@ -19,7 +19,12 @@ const containerVariants = {
 	animate: {
 		x: 0,
 		opacity: 1,
-		transition: { ease: "easeInOut", duration: 0.5, type: "spring", stiffness:100 },
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+			type: "spring",
+			stiffness: 100,
+		},
 	},
 
 	exit: {
@@ -30,101 +35,92 @@ const containerVariants = {
 };
 function FindYourAccount() {
 	return (
-		<div className="recovery-parent">
-			<div className="recovery-tile">
-				<div className="recovery-details">
-					<h1>Recover Your Account</h1>
-					<div className="hr-div"></div>
-					<h2>
-						Please enter your username or registered email address to search
-						your account
-					</h2>
-					<input
-						onChange={(event) => console.log(event.target.value)}
-						placeholder="Username or Email"
-						type="text"
-					/>
-				</div>
+		<div className="recovery-tile">
+			<div className="recovery-details">
+				<h1>Recover Your Account</h1>
 				<div className="hr-div"></div>
-				<div className="recovery-navigator">
-					<Link
-						className="primary-button"
-						to={{ pathname: "/forgot-password", search: "?userId=12" }}
-					>
-						Search
-					</Link>
-					<button className="secondary-button">Cancel</button>
-				</div>
+				<h2>
+					Please enter your username or registered email address to search your
+					account
+				</h2>
+				<input
+					onChange={(event) => console.log(event.target.value)}
+					placeholder="Username or Email"
+					type="text"
+				/>
+			</div>
+			<div className="hr-div"></div>
+			<div className="recovery-navigator">
+				<Link
+					className="primary-button"
+					to={{ pathname: "/forgot-password", search: "?userId=12" }}
+				>
+					Search
+				</Link>
+				<button className="secondary-button">Cancel</button>
 			</div>
 		</div>
 	);
 }
 function VerifyYourIdentity() {
 	return (
-		<div className="recovery-parent">
-			<div className="recovery-tile">
-				<div className="recovery-details">
-					<h1>
-						Please Verify Its You!
-						<span>Joy</span>
-					</h1>
-					<div className="hr-div"></div>
-					<h2>Enter answer to the security question</h2>
-					<div className="recovery-qna">
-						<h3 className="recovery-question">What is your pet name?</h3>
-						<input placeholder="Answer" type="text" />
-					</div>
-				</div>
+		<div className="recovery-tile">
+			<div className="recovery-details">
+				<h1>
+					Please Verify Its You!
+					<span>Joy</span>
+				</h1>
 				<div className="hr-div"></div>
-				<div className="recovery-navigator">
-					<Link
-						className="primary-button"
-						to={{
-							pathname: "/forgot-password",
-							search: "?userId=12&resetPassword=true",
-						}}
-					>
-						Verify
-					</Link>
-
-					<button className="secondary-button">Cancel</button>
+				<h2>Enter answer to the security question</h2>
+				<div className="recovery-qna">
+					<h3 className="recovery-question">What is your pet name?</h3>
+					<input placeholder="Answer" type="text" />
 				</div>
+			</div>
+			<div className="hr-div"></div>
+			<div className="recovery-navigator">
+				<Link
+					className="primary-button"
+					to={{
+						pathname: "/forgot-password",
+						search: "?userId=12&resetPassword=true",
+					}}
+				>
+					Verify
+				</Link>
+
+				<button className="secondary-button">Cancel</button>
 			</div>
 		</div>
 	);
 }
 function RecoverYourAccount() {
 	return (
-		<div className="recovery-parent">
-			<div className="recovery-tile">
-				<div className="recovery-details">
-					<h1>
-						We Got You
-						<span style={{ color: "#ff6994" }}>Joy ✨</span>
-					</h1>
-					<div className="hr-div"></div>
-					<h2>You are just one step away to recover your account</h2>
-					<input
-						onChange={(event) => console.log(event.target.value)}
-						placeholder="New Password"
-						type="text"
-					/>
-					<input
-						onChange={(event) => console.log(event.target.value)}
-						placeholder="Confirm New Password"
-						type="text"
-					/>
-				</div>
+		<div className="recovery-tile">
+			<div className="recovery-details">
+				<h1>
+					We Got You
+					<span style={{ color: "#ff6994" }}>Joy ✨</span>
+				</h1>
 				<div className="hr-div"></div>
-				<div className="recovery-navigator">
-					<Link
-						className="primary-button"
-						to={{ pathname: "/forgot-password" }}
-					>
-						Change
-					</Link>
-					<button className="secondary-button">Cancel</button>
-				</div>
+				<h2>You are just one step away to recover your account</h2>
+				<input
+					onChange={(event) => console.log(event.target.value)}
+					placeholder="New Password"
+					type="text"
+				/>
+				<input
+					onChange={(event) => console.log(event.target.value)}
+					placeholder="Confirm New Password"
+					type="text"
+				/>
+			</div>
+			<div className="hr-div"></div>
+			<div className="recovery-navigator">
+				<Link className="primary-button" to={{ pathname: "/forgot-password" }}>
+					Change
+				</Link>
+				<button className="secondary-button">Cancel</button>
 			</div>
 		</div>
 	);
@@ -159,16 +155,18 @@ export default function ForgotPassword() {
 	const Component = pages[recoveryTile];
 
 	return (
-		<AnimatePresence exitBeforeEnter>
-			<motion.div
-				key={recoveryTile}
-				variants={containerVariants}
-				initial="initial"
-				animate="animate"
-				exit="exit"
-			>
-				<Component />
-			</motion.div>
-		</AnimatePresence>
+		<div className="recovery-parent">
+			<AnimatePresence exitBeforeEnter>
+				<motion.div
+					key={recoveryTile}
+					variants={containerVariants}
+					initial="initial"
+					animate="animate"
+					exit="exit"
+				>
+					<Component />
+				</motion.div>
+			</AnimatePresence>
+		</div>
 	);
 }
