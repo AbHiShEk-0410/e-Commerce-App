@@ -57,6 +57,7 @@
 }
 body {
 	background: var(--secondary-color);
+	overflow:visible;
 }
 .primary-button {
 	background: var(--primary-color);
@@ -68,11 +69,12 @@ body {
 	border-radius: var(--soft-border-radius);
 	cursor: pointer;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	text-decoration: none;
 }
-.secondary-button{
-	background:white;
-	color:var(--ternary-color);
-	border:1px solid transparent;
+.secondary-button {
+	background: white;
+	color: var(--ternary-color);
+	border: 1px solid transparent;
 	border-radius: var(--soft-border-radius);
 	font-family: var(--card-tile-font);
 	font-size: large;

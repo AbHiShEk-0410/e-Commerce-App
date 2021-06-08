@@ -8,6 +8,7 @@ import {
 	checkUserId,
 } from "../utilities";
 import { Error404 } from "./";
+import axios from "axios";
 
 const containerVariants = {
 	initial: {
@@ -34,6 +35,26 @@ const containerVariants = {
 	},
 };
 function FindYourAccount() {
+	const navigate = useNavigate();
+	const [userInput, setUserInput] = useState(null);
+	async function findUserInDb() {
+		const userInputType = isItUsernameOrEmail(userInput);
+		if (userInputType.success) {
+			try {
+				const { data: userData } = await axios.post(
+					"https://database-1.joygupta1.repl.co/user/validate",
+					{
+						[userInputType.type]: userInput,
+					}
+				);
+				navigate(`/forgot-password?userId=${userData.data.id}`);
+			} catch (error) {
+				console.log("Error ", error.response.data.message);
+			}
+		} else {
+			console.log("Please enter a valid email/username");
+		}
+	}
 	return (
 		<div className="recovery-tile">
 			<div className="recovery-details">
@@ -44,37 +65,63 @@ function FindYourAccount() {
 					account
 				</h2>
 				<input
-					onChange={(event) => console.log(event.target.value)}
+					onChange={(event) => setUserInput(event.target.value)}
 					placeholder="Username or Email"
 					type="text"
 				/>
 			</div>
 			<div className="hr-div"></div>
 			<div className="recovery-navigator">
-				<Link
-					className="primary-button"
-					to={{ pathname: "/forgot-password", search: "?userId=12" }}
-				>
+				<button className="primary-button" onClick={findUserInDb}>
 					Search
-				</Link>
+				</button>
 				<button className="secondary-button">Cancel</button>
 			</div>
 		</div>
 	);
 }
 function VerifyYourIdentity() {
+	const [userData, setUserData] = useState({});
+	const [userInput, setUserInput] = useState(null);
+	const { search } = useLocation();
+	const searchObj = queryStringToObject(search);
+	const integerRegex = new RegExp("^[0-9]+$");
+	useEffect(() => {
+		if (
+			Object.keys(searchObj).length === 1 &&
+			!!searchObj.userId &&
+			integerRegex.test(searchObj.userId)
+		) {
+			const getDataFromServer = async () => {
+				try {
+					const dataFromServer = await axios.get(
+						`https://database-1.joygupta1.repl.co/user/security-question/${searchObj.userId}`
+					);
+					setUserData(dataFromServer.data.data);
+				} catch ({response}) {
+					console.log(response.data.message)
+				}
+			};
+			getDataFromServer();
+		}
+	}, []);
+
 	return (
 		<div className="recovery-tile">
 			<div className="recovery-details">
 				<h1>
 					Please Verify Its You!
-					<span>Joy</span>
+					<span>{userData.name}</span>
 				</h1>
 				<div className="hr-div"></div>
 				<h2>Enter answer to the security question</h2>
 				<div className="recovery-qna">
-					<h3 className="recovery-question">What is your pet name?</h3>
-					<input placeholder="Answer" type="text" />
+					<h3 className="recovery-question">{userData.question}</h3>
+					<input
+						onChange={(event) => setUserInput(event.target.value)}
+						placeholder="Answer"
+						type="text"
+					/>
 				</div>
 			</div>
 			<div className="hr-div"></div>
