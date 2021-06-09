@@ -22,7 +22,7 @@ export default function Signup() {
 					email: userDetails.email,
 					password: userDetails.password,
 					question: userDetails.question,
-					answer: userDetails.answer,
+					answer: userDetails.answer.toLowerCase(),
 				}
 			);
 		} catch ({ response }) {
@@ -63,6 +63,7 @@ export default function Signup() {
 									setUserDetails({ ...userDetails, email: event.target.value })
 								}
 								placeholder="Email address"
+								type="email"
 								required
 							></input>
 							<input
@@ -75,6 +76,7 @@ export default function Signup() {
 								placeholder="Password"
 								type="password"
 								required
+								minLength="8"
 							></input>
 							<input
 								onChange={(event) =>
@@ -126,7 +128,7 @@ export default function Signup() {
 								required
 							></input>
 							<input
-								disabled={!signupParamsOK}
+								// disabled={!signupParamsOK}
 								className="login-button"
 								type="submit"
 								value="Sign Up"

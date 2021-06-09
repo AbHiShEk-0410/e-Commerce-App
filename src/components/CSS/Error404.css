@@ -1,40 +1,40 @@
 @import url("https://fonts.googleapis.com/css?family=Arvo");
 .page-404 {
-  padding: 40px 0;
-  background: white;
-  font-family: "Arvo", serif;
+	padding: 40px 0;
+	background: white;
+	font-family: "Arvo", serif;
 }
 .page-404 img {
-  width: 100%;
+	width: 100%;
 }
 .bg-404 {
-  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-  height: 85vh;
-  background-position: center;
-  background-repeat: no-repeat;
+	background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+	height: 85vh;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 .bg-404 h1 {
-  font-size: 80px;
+	font-size: 80px;
 }
 .bg-404 h3 {
-  font-size: 80px;
+	font-size: 80px;
 }
 .link-404 {
-  color:var(--primary-color);
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 20px;
-  font-weight: bolder;
-  margin: 20px 0;
-  display: inline-block;
-  border:2px solid var(--primary-color);
-  border-radius: var(--soft-border-radius);
+	color: var(--primary-color);
+	text-decoration: none;
+	padding: 10px 20px;
+	font-size: 20px;
+	font-weight: bolder;
+	margin: 20px 0;
+	display: inline-block;
+	border: 2px solid var(--primary-color);
+	border-radius: var(--soft-border-radius);
 }
-.link-404:hover{
-  transition-duration: 0.3s;
-  background-color: var(--primary-color);
-  color:white;
+.link-404:hover {
+	transition-duration: 0.3s;
+	background-color: var(--primary-color);
+	color: white;
 }
 .error-msg {
-  margin-top: -70px;
+	margin-top: -70px;
 }

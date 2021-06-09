@@ -1,5 +1,6 @@
 body {
 	background-color: white;
+
 }
 .signup-page {
 	margin: auto;
@@ -36,7 +37,6 @@ body {
 	justify-content: center;
 	align-items: center;
 	padding: 10px;
-	
 }
 .logo {
 	display: flex;

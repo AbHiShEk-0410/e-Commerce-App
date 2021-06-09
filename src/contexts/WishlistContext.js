@@ -6,18 +6,15 @@ export function WishlistProvider({ children }) {
         // This function is to handle all the functionalities related to wishlist management i.e
         // Remove from Wishlist and Add to Cart
         // idInWishlist => To enable add or remove from wishlist functionality through one button
-        console.log("Invoked", query);
 
         switch (query) {
             case "ADD_TO_WISHLIST":
-                console.log("added");
                 return {
                     idInWishlist: [...idInWishlist, item.id],
                     wishlistItems: [...wishlistItems, item]
                 };
 
             case "REMOVE_FROM_WISHLIST":
-                console.log("Removed");
                 return {
                     idInWishlist: idInWishlist.filter((id) => id !== item.id),
                     wishlistItems: wishlistItems.filter(

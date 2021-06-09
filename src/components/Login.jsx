@@ -3,8 +3,7 @@ import axios from "axios";
 import { useLogin } from "../contexts";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { emailUsernameChecker } from "../utilities";
-
+import { checkLoginParams } from "../utilities";
 
 export default function Login() {
 	const { state } = useLocation();
@@ -18,7 +17,7 @@ export default function Login() {
 	}, [login, setLogin]);
 
 	useEffect(() => {
-		setLoginParams(emailUsernameChecker(userDetails));
+		setLoginParams(checkLoginParams(userDetails));
 	}, [userDetails]);
 
 	async function Signup(event) {

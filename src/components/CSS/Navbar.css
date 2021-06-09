@@ -1,22 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap");
 
-:root {
-  --primary-color: #00203fff;
-  --secondary-color: #adefd1ff;
-  --ternary-white: rgb(224, 224, 224);
-  --secondary-black: #b3a2a2;
-  --border-size: 1px;
-}
-:after,
-:before,
-* {
-  padding: 0rem;
-  margin: 0rem;
-}
-.App {
-  font-family: sans-serif;
-  text-align: center;
-}
 .Link {
   color: inherit;
   text-decoration: inherit;
@@ -57,7 +39,7 @@
 }
 .router-heading {
   margin-right: 0.3rem;
-  font-weight: lighter;
+  font-weight: bold;
 }
 .user-setting {
   position: relative;

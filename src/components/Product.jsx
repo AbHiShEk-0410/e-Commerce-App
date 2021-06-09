@@ -28,7 +28,6 @@ export default function Product() {
       try {
         const response = await axios("https://database-1.joygupta1.repl.co/product")
         setData(response.data.data)
-        console.log(data)
       }
       catch (error) {
         console.log(error);
@@ -36,11 +35,7 @@ export default function Product() {
     }
     loadProducts();
   }, [])
-  console.log(data)
-  function mock(temp) {
-    console.log(temp === "vegetable" ? "veg" : temp)
 
-  }
 
   return (
     <>
