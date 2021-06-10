@@ -83,14 +83,14 @@ function FindYourAccount() {
 function VerifyYourIdentity() {
 	const [userData, setUserData] = useState({});
 	const [userInput, setUserInput] = useState(null);
+	const navigate = useNavigate();
 	const { search } = useLocation();
 	const searchObj = queryStringToObject(search);
-	const integerRegex = new RegExp("^[0-9]+$");
 	useEffect(() => {
 		if (
 			Object.keys(searchObj).length === 1 &&
 			!!searchObj.userId &&
-			integerRegex.test(searchObj.userId)
+			checkUserId(searchObj.userId)
 		) {
 			const getDataFromServer = async () => {
 				try {
@@ -98,13 +98,33 @@ function VerifyYourIdentity() {
 						`https://database-1.joygupta1.repl.co/user/security-question/${searchObj.userId}`
 					);
 					setUserData(dataFromServer.data.data);
-				} catch ({response}) {
-					console.log(response.data.message)
+				} catch ({ response }) {
+					console.log(response.data.message);
 				}
 			};
 			getDataFromServer();
 		}
 	}, []);
+
+	async function validateUser() {
+		try {
+			const serverResponse = await axios.post(
+				"https://database-1.joygupta1.repl.co/user/security-answer-validation",
+				{
+					id: searchObj.userId,
+					answer: userInput,
+				}
+			);
+			console.log(serverResponse);
+			if (serverResponse.data.success) {
+				localStorage.setItem("isUserValid", JSON.stringify(true));
+				navigate(`/forgot-password?userId=${searchObj.userId}&reset=true`);
+			} else {
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	return (
 		<div className="recovery-tile">
@@ -126,16 +146,9 @@ function VerifyYourIdentity() {
 			</div>
 			<div className="hr-div"></div>
 			<div className="recovery-navigator">
-				<Link
-					className="primary-button"
-					to={{
-						pathname: "/forgot-password",
-						search: "?userId=12&resetPassword=true",
-					}}
-				>
+				<button onClick={validateUser} className="primary-button">
 					Verify
-				</Link>
-
+				</button>
 				<button className="secondary-button">Cancel</button>
 			</div>
 		</div>
@@ -188,10 +201,7 @@ export default function ForgotPassword() {
 		const urlObject = queryStringToObject(search);
 		if (pathname === "/forgot-password" && search === "") {
 			setRecoveryTile("findYourAccount");
-		} else if (
-			checkUserId(urlObject.userId) &&
-			urlObject.resetPassword === "true"
-		) {
+		} else if (checkUserId(urlObject.userId) && urlObject.reset === "true") {
 			setRecoveryTile("recoverYourAccount");
 		} else if (checkUserId(urlObject.userId)) {
 			setRecoveryTile("verifyYourAccount");
