@@ -3,26 +3,28 @@ import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { password } from "../../constants";
 import { queryStringToObject } from "../../utilities";
+
 export default function RecoverYourAccount() {
 	const [userInput, setUserInput] = useState({
 		password: undefined,
 		confirmPassword: undefined,
 	});
-	const [disableButton, setDisableButton] = useState(true);
 	const { search } = useLocation();
 	const { state } = useLocation();
-	const searchObj = queryStringToObject(search);
 	const navigate = useNavigate();
-	console.log(state);
+	const [disableButton, setDisableButton] = useState(true);
+	const searchObj = queryStringToObject(search);
+
 	useEffect(() => {
 		if (!localStorage.getItem("isUserValid")) {
 			navigate("/login"); //Later change to forbidden route
 		}
 		return () => {
-			//If user switch to other tab then the token will be removed from local storage
+			//If user switch to other route then the token will be removed from local storage
 			localStorage.clear();
 		};
-	});
+	}, []);
+
 	useEffect(() => {
 		if (!password.expression.test(userInput.password)) {
 			console.log(password.warning);
@@ -36,12 +38,8 @@ export default function RecoverYourAccount() {
 			}
 		}
 	}, [userInput]);
+
 	async function changePassword() {
-		console.log("inside, all good");
-		console.log({
-			id: searchObj.userId,
-			password: userInput.password,
-		});
 		try {
 			const serverReponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/user/reset-password",
@@ -84,7 +82,11 @@ export default function RecoverYourAccount() {
 			</div>
 			<div className="hr-div"></div>
 			<div className="recovery-navigator">
-				<button className="primary-button" onClick={changePassword}>
+				<button
+					className="primary-button"
+					disabled={disableButton}
+					onClick={changePassword}
+				>
 					Change
 				</button>
 				<button className="secondary-button">Cancel</button>

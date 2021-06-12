@@ -6,9 +6,13 @@ import { isItUsernameOrEmail } from "../../utilities";
 export default function FindYourAccount() {
 	const navigate = useNavigate();
 	const [userInput, setUserInput] = useState(null);
+
 	async function findUserInDb() {
+		//Checking whether userInput is an email or username or something else
 		const userInputType = isItUsernameOrEmail(userInput);
+
 		if (userInputType.success) {
+			//If the userInput is one of email or username
 			try {
 				const { data: userData } = await axios.post(
 					"https://database-1.joygupta1.repl.co/user/validate",
@@ -24,6 +28,7 @@ export default function FindYourAccount() {
 			console.log("Please enter a valid email/username");
 		}
 	}
+
 	return (
 		<div className="recovery-tile">
 			<div className="recovery-details">

@@ -9,6 +9,7 @@ export default function VerifyYourIdentity() {
 	const navigate = useNavigate();
 	const { search } = useLocation();
 	const searchObj = queryStringToObject(search);
+
 	useEffect(() => {
 		const getDataFromServer = async () => {
 			try {
