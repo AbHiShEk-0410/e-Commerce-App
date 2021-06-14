@@ -7,32 +7,42 @@ import { checkLoginParams } from "../utilities";
 
 export default function Login() {
 	const { state } = useLocation();
-	const [userDetails, setUserDetails] = useState({});
+	const [userInput, setUserInput] = useState({});
 	const [loginParams, setLoginParams] = useState({});
 	const { login, setLogin } = useLogin();
 	const navigate = useNavigate();
+	console.log("login", login);
+	useEffect(() => {
+		setLogin(JSON.parse(localStorage.getItem("isUserLogin")));
+		//Navigate user from login route to product if already logged in otherwise to login
+		login ? navigate("/product") : navigate("/login");
+	}, [login, navigate, setLogin]);
 
 	useEffect(() => {
-		setLogin(JSON.parse(localStorage.getItem("Login")));
-	}, [login, setLogin]);
-
-	useEffect(() => {
-		setLoginParams(checkLoginParams(userDetails));
-	}, [userDetails]);
+		//Will help in enabling/disabling the Login button
+		setLoginParams(checkLoginParams(userInput));
+	}, [userInput]);
 
 	async function Signup(event) {
 		event.preventDefault();
+
 		try {
 			let loginResponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/login",
 				{
-					[loginParams.type]: userDetails.user,
-					password: userDetails.password,
+					[loginParams.type]: userInput.user,
+					password: userInput.password,
 				}
 			);
+
 			setLogin(true);
-			localStorage.setItem("Login", JSON.stringify("true"));
-			console.log(loginResponse);
+			localStorage.setItem("isUserLogin", JSON.stringify(true));
+			localStorage.setItem(
+				"accessToken",
+				JSON.stringify(loginResponse.data.accessToken)
+			);
+			console.log(loginResponse.data.message);
+			//Redirecting to the previous private route if exists otherwise to /product
 			navigate(state === null ? "/product" : state.from);
 		} catch ({ response }) {
 			console.log(response.data);
@@ -55,13 +65,13 @@ export default function Login() {
 					<form className="login-form" onSubmit={Signup}>
 						<input
 							onChange={(event) =>
-								setUserDetails({ ...userDetails, user: event.target.value })
+								setUserInput({ ...userInput, user: event.target.value })
 							}
 							placeholder="Email address or username"
 						></input>
 						<input
 							onChange={(event) =>
-								setUserDetails({ ...userDetails, password: event.target.value })
+								setUserInput({ ...userInput, password: event.target.value })
 							}
 							placeholder="Password"
 							type="password"
