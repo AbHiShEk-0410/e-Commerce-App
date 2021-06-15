@@ -1,7 +1,9 @@
-const { loginMiddleware } = require("./loginMiddleware")
-const { emailValidation, signupParamsCheck } = require("./singupMiddleware")
+const { loginMiddleware } = require("./loginMiddleware");
+const { emailValidation, signupParamsCheck } = require("./singupMiddleware");
+const { checkAuthToken } = require("./checkAuthToken");
 module.exports = {
 	loginParamCheck: loginMiddleware,
 	emailValidation,
-	signupParamsCheck
-}
+	signupParamsCheck,
+	authorization: checkAuthToken,
+};
