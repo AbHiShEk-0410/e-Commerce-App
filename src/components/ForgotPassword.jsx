@@ -1,6 +1,6 @@
 import "./CSS/forgot-password.css";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { queryStringToObject, checkUserId } from "../utilities";
 import { recovery } from "./recovery";
@@ -16,10 +16,8 @@ const recoveryPages = {
 
 export default function ForgotPassword() {
 	//Only renders when the url is "/forgot-password and then the first recovery tile will appear"
-
 	const [recoveryTile, setRecoveryTile] = useState("findYourAccount");
 	const { search, pathname } = useLocation();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		const urlObject = queryStringToObject(search);

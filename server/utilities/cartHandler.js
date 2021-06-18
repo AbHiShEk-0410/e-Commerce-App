@@ -19,8 +19,7 @@ function deletefromCart(productId, userCart) {
 	return userCart;
 }
 function removeFromCart(productId, userCart) {
-	console.log(productId);
-	console.log(userCart);
+
 	const productInUserCart = userCart.find((item) => item.id === productId);
 	if (!productInUserCart) {
 		return userCart;

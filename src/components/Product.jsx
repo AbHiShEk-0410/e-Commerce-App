@@ -20,8 +20,7 @@ export default function Product() {
     dispatch
   } = useSortFilter();
   const [data, setData] = useState([])
-
-
+ 
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     async function loadProducts() {

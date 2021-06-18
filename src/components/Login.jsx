@@ -11,12 +11,9 @@ export default function Login() {
 	const [loginParams, setLoginParams] = useState({});
 	const { login, setLogin } = useLogin();
 	const navigate = useNavigate();
-	console.log("login", login);
 	useEffect(() => {
-		setLogin(JSON.parse(localStorage.getItem("isUserLogin")));
 		//Navigate user from login route to product if already logged in otherwise to login
 		login ? navigate("/product") : navigate("/login");
-		console.log("I am running");
 	}, []);
 
 	useEffect(() => {
@@ -26,7 +23,6 @@ export default function Login() {
 
 	async function Signup(event) {
 		event.preventDefault();
-
 		try {
 			let loginResponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/login",
@@ -35,7 +31,6 @@ export default function Login() {
 					password: userInput.password,
 				}
 			);
-
 			setLogin(true);
 			localStorage.setItem("isUserLogin", JSON.stringify(true));
 			localStorage.setItem(

@@ -13,11 +13,8 @@ import {
 } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { useLogin } from "./contexts";
-
 export default function App() {
 	const { loader } = useLogin();
-	console.log("App");
-
 	return (
 		<div className="App">
 			<Navbar />

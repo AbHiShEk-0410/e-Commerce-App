@@ -11,15 +11,6 @@ import logo from "../images/front-logo.png";
 
 export default function Home() {
 	const { login, setLogin } = useLogin();
-	const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-	const isUserLogin = JSON.parse(localStorage.getItem("isUserLogin"));
-	console.log(accessToken)
-	console.log(isUserLogin)
-	if (!!accessToken || !!isUserLogin) {
-		setLogin(true);
-	} else {
-		setLogin(false);
-	}
 	const navigate = useNavigate();
 
 	return (

@@ -1,14 +1,10 @@
 import { useCart, useWishlist } from "../contexts";
 import { useEffect, useState } from "react";
 import { checkItemInObject } from "../utilities";
-import { useLogin } from "../contexts";
-
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const [balance, setBalance] = useState(0);
-	const { login } = useLogin();
-
 	useEffect(() => {
 		setBalance(
 			cartState.cartItems.reduce(
@@ -16,8 +12,7 @@ export default function Cart() {
 				0
 			)
 		);
-	});
-
+	}, [cartState.cartItems]);
 	return (
 		<div>
 			Total {balance}
