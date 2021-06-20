@@ -1,5 +1,5 @@
 const { findUserInDb } = require("../utilities");
-function cartMiddleware(request, response, next) {
+function requestMiddleware(request, response, next) {
 	const userId = request.payload.id;
 	const userInfo = findUserInDb({ id: userId });
 	if (!userInfo) {
@@ -7,12 +7,20 @@ function cartMiddleware(request, response, next) {
 			.status(404)
 			.send({ success: false, message: "user does not eixts" });
 	}
-	const productId = request.body.productId;
-	if (!productId) {
+	const product = request.body.product;
+	if (
+		!product.id ||
+		!product.name ||
+		!product.type ||
+		!product.img ||
+		!product.amount ||
+		!product.price ||
+		!product.unit
+	) {
 		response.status(400).send({ success: false, message: "Missing Paramters" });
 	}
-	request.productId = productId;
+	request.product = product;
 	request.userInfo = userInfo;
 	next();
 }
-exports.cartMiddleware = cartMiddleware;
+exports.requestMiddleware = requestMiddleware;
