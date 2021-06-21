@@ -1,1 +1,2 @@
-export const checkItemInObject = (idsList, obj) => idsList.includes(obj.id);
+export const checkItemInObject = (idsList, obj) => false;
+//Temporarily altered, will change later
