@@ -1,10 +1,11 @@
 import { useCart, useWishlist } from "../contexts";
 import { useEffect, useState } from "react";
-import { checkItemInObject } from "../utilities";
+import { checkItemInObject, cartHandler } from "../utilities";
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const [balance, setBalance] = useState(0);
+
 	useEffect(() => {
 		setBalance(
 			cartState.cartItems.reduce(
@@ -22,35 +23,23 @@ export default function Cart() {
 					<h1>{itemInCart.name}</h1>
 					<strong>{itemInCart.price}</strong>
 					<button
-						onClick={() =>
-							cartDispatch({
-								query:
-									itemInCart.quantity === 1
-										? "REMOVE_FROM_CART"
-										: "SUBTRACT_ONE_MORE",
-								item: itemInCart,
-							})
+						onClick={(event) =>
+							cartHandler(event, "REMOVE_FROM_CART", itemInCart, cartDispatch)
 						}
 					>
 						-
 					</button>
 					{itemInCart.quantity}
 					<button
-						onClick={() =>
-							cartDispatch({
-								query: "ADD_ONE_MORE",
-								item: itemInCart,
-							})
+						onClick={(event) =>
+							cartHandler(event, "ADD_TO_CART", itemInCart, cartDispatch)
 						}
 					>
 						+
 					</button>
 					<button
-						onClick={() =>
-							cartDispatch({
-								query: "REMOVE_FROM_CART",
-								item: itemInCart,
-							})
+						onClick={(event) =>
+							cartHandler(event, "DELETE_FROM_CART", itemInCart, cartDispatch)
 						}
 					>
 						Remove from Cart

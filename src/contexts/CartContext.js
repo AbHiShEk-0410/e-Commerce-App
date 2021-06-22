@@ -11,6 +11,7 @@ function CartReducer(cartState, newCart) {
 	};
 }
 export function CartProvider({ children }) {
+
 	const [cartState, cartDispatch] = useReducer(CartReducer, {
 		cartItems: [],
 		idInCart: [],
