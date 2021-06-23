@@ -3,8 +3,6 @@ import { createContext, useReducer, useContext } from "react";
 const CartContext = createContext();
 function CartReducer(cartState, newCart) {
 	//The only dispatch function to manage whole cart because all the checks are now shifted to carRequestHandler
-	console.log(cartState);
-	console.log("newCart ", newCart);
 	return {
 		idInCart: cartState.idInCart,
 		cartItems: newCart,

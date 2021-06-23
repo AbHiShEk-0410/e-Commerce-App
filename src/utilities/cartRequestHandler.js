@@ -1,6 +1,5 @@
 import axios from "axios";
 export async function cartHandler(event, query, productDetails, cartDispatch) {
-	event.preventDefault();
 	const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 	switch (query) {
 		case "ADD_TO_CART":
@@ -24,7 +23,6 @@ export async function cartHandler(event, query, productDetails, cartDispatch) {
 			break;
 
 		case "REMOVE_FROM_CART":
-			console.log(accessToken);
 			try {
 				const serverReponse = await axios.delete(
 					process.env.REACT_APP_SERVER_URL + "/cart/remove-from-cart",
@@ -44,7 +42,6 @@ export async function cartHandler(event, query, productDetails, cartDispatch) {
 			break;
 
 		case "DELETE_FROM_CART":
-			console.log(accessToken);
 			try {
 				const serverReponse = await axios.delete(
 					process.env.REACT_APP_SERVER_URL + "/cart/delete-from-cart",

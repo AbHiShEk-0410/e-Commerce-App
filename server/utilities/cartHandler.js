@@ -1,6 +1,5 @@
 function addToCart(product, userCart) {
 	const productInUserCart = userCart.find((item) => item.id === product.id);
-	console.log("product", product);
 	if (!productInUserCart) {
 		userCart.push({ ...product, quantity: 1 });
 		return userCart;
@@ -23,11 +22,12 @@ function deletefromCart(product, userCart) {
 }
 
 function removeFromCart(product, userCart) {
+	//Decrease quantity by one
 	const productInUserCart = userCart.find((item) => item.id === product.id);
 	if (!productInUserCart) {
 		return userCart;
 	} else if (productInUserCart.quantity === 1) {
-		userCart = deletefromCart(userCart, product.id);
+		return deletefromCart(product, userCart);
 	} else {
 		userCart = userCart.map((item) => {
 			if (item.id === product.id) {
@@ -37,7 +37,6 @@ function removeFromCart(product, userCart) {
 			}
 		});
 	}
-	return userCart;
 }
 
 exports.addToCart = addToCart;

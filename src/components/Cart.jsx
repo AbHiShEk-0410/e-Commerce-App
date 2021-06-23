@@ -1,8 +1,10 @@
 import { useCart, useWishlist } from "../contexts";
 import { useEffect, useState } from "react";
 import { checkItemInObject, cartHandler } from "../utilities";
+import axios from "axios";
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
+
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const [balance, setBalance] = useState(0);
 
@@ -14,6 +16,27 @@ export default function Cart() {
 			)
 		);
 	}, [cartState.cartItems]);
+	useEffect(() => {
+		const getCartFromServer = async () => {
+			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+			try {
+				const serverResponse = await axios.get(
+					process.env.REACT_APP_SERVER_URL + "/cart",
+					{
+						headers: {
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				);
+				cartDispatch(serverResponse.data.cart);
+			} catch (error) {
+				console.log(error.response.data);
+				return [];
+			}
+		};
+		getCartFromServer();
+	}, [cartDispatch]);
+
 	return (
 		<div>
 			Total {balance}

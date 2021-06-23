@@ -3,7 +3,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { cartHandler } from ".";
 import { useCart } from "../contexts";
 export default function CartButtonHandler(isItemInCart, itemInProduct) {
-	const { cartState, cartDispatch } = useCart();
+	const { cartDispatch } = useCart();
 	if (isItemInCart) {
 		return (
 			<>
@@ -20,14 +20,7 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
 			<button
 				class="from-product to-cart"
 				type="button"
-				onClick={(event) =>
-					cartHandler(
-						event,
-						"ADD_TO_CART",
-						itemInProduct,
-						cartDispatch
-					)
-				}
+				onClick={() => cartHandler("ADD_TO_CART", itemInProduct, cartDispatch)}
 			>
 				+ Add to Cart
 			</button>
