@@ -35,7 +35,7 @@ export default function Cart() {
 			}
 		};
 		getCartFromServer();
-	}, [cartDispatch]);
+	}, [cartDispatch, cartState]);
 
 	return (
 		<div>
@@ -46,23 +46,21 @@ export default function Cart() {
 					<h1>{itemInCart.name}</h1>
 					<strong>{itemInCart.price}</strong>
 					<button
-						onClick={(event) =>
-							cartHandler(event, "REMOVE_FROM_CART", itemInCart, cartDispatch)
+						onClick={() =>
+							cartHandler("REMOVE_FROM_CART", itemInCart, cartDispatch)
 						}
 					>
 						-
 					</button>
 					{itemInCart.quantity}
 					<button
-						onClick={(event) =>
-							cartHandler(event, "ADD_TO_CART", itemInCart, cartDispatch)
-						}
+						onClick={() => cartHandler("ADD_TO_CART", itemInCart, cartDispatch)}
 					>
 						+
 					</button>
 					<button
-						onClick={(event) =>
-							cartHandler(event, "DELETE_FROM_CART", itemInCart, cartDispatch)
+						onClick={() =>
+							cartHandler("DELETE_FROM_CART", itemInCart, cartDispatch)
 						}
 					>
 						Remove from Cart

@@ -1,5 +1,5 @@
 import axios from "axios";
-export async function cartHandler(event, query, productDetails, cartDispatch) {
+export async function cartHandler(query, productDetails, cartDispatch) {
 	const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 	switch (query) {
 		case "ADD_TO_CART":
@@ -16,6 +16,7 @@ export async function cartHandler(event, query, productDetails, cartDispatch) {
 						},
 					}
 				);
+				console.log(serverReponse);
 				cartDispatch(serverReponse.data.userInfo.cart);
 			} catch (error) {
 				console.log(error.response);
