@@ -7,3 +7,4 @@ export { queryStringToObject } from "./queryStringToObject";
 export { isItUsernameOrEmail } from "./isItUsernameOrEmail";
 export { checkUserId } from "./checkUserId";
 export { cartHandler } from "./cartRequestHandler";
+export { wishlistHandler } from "./wishlistRequestHandler";

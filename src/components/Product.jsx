@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./CSS/product.css";
-import { checkItemInObject, SortFilter, CartButtonHandler } from "../utilities";
+import {
+	checkItemInObject,
+	SortFilter,
+	CartButtonHandler,
+	wishlistHandler,
+} from "../utilities";
 import { useCart, useWishlist, useSortFilter } from "../contexts";
 import veg from "../images/veg.png";
 import nonveg from "../images/nonveg.png";
@@ -108,24 +113,16 @@ export default function Product() {
 										/>
 										<FiBookmark
 											onClick={() =>
-												wishlistDispatch({
-													query: checkItemInObject(
-														wishlistState.idInWishlist,
-														itemInProduct
-													)
-														? "REMOVE_FROM_WISHLIST"
-														: "ADD_TO_WISHLIST",
-													item: itemInProduct,
-												})
+												wishlistHandler(itemInProduct, wishlistDispatch)
 											}
 											style={{
 												fontSize: "26px",
-												fill: checkItemInObject(
-													wishlistState.idInWishlist,
-													itemInProduct
-												)
-													? "#0b002a"
-													: "white",
+												// fill: checkItemInObject(
+												// 	wishlistState.idInWishlist,
+												// 	itemInProduct
+												// )
+												// 	? "#0b002a"
+												// 	: "white",
 											}}
 										/>
 									</div>

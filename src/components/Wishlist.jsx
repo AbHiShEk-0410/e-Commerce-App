@@ -1,5 +1,5 @@
 import { useCart, useWishlist } from "../contexts/";
-import { checkItemInObject } from "../utilities";
+import { checkItemInObject, wishlistHandler } from "../utilities";
 
 export default function Wishlist() {
     const { wishlistState, wishlistDispatch } = useWishlist();
@@ -13,10 +13,7 @@ export default function Wishlist() {
                     <strong>{itemInWishlist.price}</strong>
                     <button
                         onClick={() =>
-                            wishlistDispatch({
-                                query: "REMOVE_FROM_WISHLIST",
-                                item: itemInWishlist
-                            })
+                            wishlistHandler(itemInWishlist, wishlistDispatch)
                         }
                     >
                         Wishlist
