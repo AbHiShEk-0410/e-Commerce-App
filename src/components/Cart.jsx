@@ -1,6 +1,6 @@
 import { useCart, useWishlist } from "../contexts";
 import { useEffect, useState } from "react";
-import { checkItemInObject, cartHandler } from "../utilities";
+import { checkItemInObject, cartHandler, wishlistHandler } from "../utilities";
 import axios from "axios";
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
@@ -67,12 +67,7 @@ export default function Cart() {
 					</button>
 					<button
 						onClick={() =>
-							wishlistDispatch({
-								query: checkItemInObject(wishlistState.idInWishlist, itemInCart)
-									? "REMOVE_FROM_WISHLIST"
-									: "ADD_TO_WISHLIST",
-								item: itemInCart,
-							})
+						wishlistHandler(itemInCart, wishlistDispatch)
 						}
 					>
 						Wishlist

@@ -1,3 +1,4 @@
-export function checkItemInObject(userCart, item) {
-	return !!userCart.find((cartItem) => cartItem.id === item.id);
+export function checkItemInObject(array, item) {
+	console.log(array, item);
+	return !!array.find((arrayItem) => arrayItem.id === item.id);
 }

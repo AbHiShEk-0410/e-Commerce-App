@@ -14,9 +14,6 @@ import egg from "../images/egg.png";
 import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 export default function Product() {
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
@@ -26,9 +23,8 @@ export default function Product() {
 	} = useSortFilter();
 	const [data, setData] = useState([]);
 
-	const [toggle, setToggle] = useState(false);
 	useEffect(() => {
-		async function loadProducts() {
+		const loadProducts = async () => {
 			try {
 				const response = await axios(
 					"https://database-1.joygupta1.repl.co/product"
@@ -36,8 +32,9 @@ export default function Product() {
 				setData(response.data.data);
 			} catch (error) {
 				console.log(error);
+				setData([]);
 			}
-		}
+		};
 		loadProducts();
 	}, []);
 	useEffect(() => {
@@ -54,12 +51,32 @@ export default function Product() {
 				);
 				cartDispatch(serverResponse.data.cart);
 			} catch (error) {
-				console.log(error.response.data);
+				console.log(error);
 				return [];
 			}
 		};
 		getCartFromServer();
 	}, [cartDispatch]);
+	useEffect(() => {
+		const getWishlistFromServer = async () => {
+			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+			try {
+				const serverResponse = await axios.get(
+					process.env.REACT_APP_SERVER_URL + "/wishlist",
+					{
+						headers: {
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				);
+				wishlistDispatch(serverResponse.data.wishlist);
+			} catch (error) {
+				console.log(error)
+				return [];
+			}
+		};
+		getWishlistFromServer();
+	}, [wishlistDispatch]);
 
 	return (
 		<>
@@ -117,12 +134,12 @@ export default function Product() {
 											}
 											style={{
 												fontSize: "26px",
-												// fill: checkItemInObject(
-												// 	wishlistState.idInWishlist,
-												// 	itemInProduct
-												// )
-												// 	? "#0b002a"
-												// 	: "white",
+												fill: checkItemInObject(
+													wishlistState.wishlistItems,
+													itemInProduct
+												)
+													? "#0b002a"
+													: "white",
 											}}
 										/>
 									</div>
