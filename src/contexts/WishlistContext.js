@@ -4,14 +4,12 @@ const WishlistContext = createContext();
 export function WishlistProvider({ children }) {
 	function WishlistReducer(wishlistState, newWishlist) {
 		return {
-			idInWishlist: wishlistState.idInWishlist,
 			wishlistItems: newWishlist,
 		};
 	}
 
 	const [wishlistState, wishlistDispatch] = useReducer(WishlistReducer, {
 		wishlistItems: [],
-		idInWishlist: [],
 	});
 
 	return (
