@@ -34,6 +34,7 @@
 	--soft-padding-gap: 5px;
 	--hard-padding-gap: 10px;
 	--harder-padding-gap: 1rem;
+	--lower-z-index:-2;
 	--primary-heading-font: "Roboto", sans-serif;
 	--qoute-font: "Work Sans", sans-serif;
 	--card-tile-font: "Poppins", sans-serif;
