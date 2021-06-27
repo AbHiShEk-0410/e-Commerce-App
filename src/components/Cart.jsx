@@ -1,6 +1,7 @@
 import { useCart, useWishlist } from "../contexts";
 import { useEffect, useState } from "react";
 import { checkItemInObject, cartHandler, wishlistHandler } from "../utilities";
+import { EmptyCart } from ".";
 import axios from "axios";
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
@@ -39,41 +40,42 @@ export default function Cart() {
 
 	return (
 		<div>
-			Total {balance}
-			{cartState.cartItems.map((itemInCart) => (
-				<div id={itemInCart.id}>
-					<img src={itemInCart.image} alt="img"></img>
-					<h1>{itemInCart.name}</h1>
-					<strong>{itemInCart.price}</strong>
-					<button
-						onClick={() =>
-							cartHandler("REMOVE_FROM_CART", itemInCart, cartDispatch)
-						}
-					>
-						-
-					</button>
-					{itemInCart.quantity}
-					<button
-						onClick={() => cartHandler("ADD_TO_CART", itemInCart, cartDispatch)}
-					>
-						+
-					</button>
-					<button
-						onClick={() =>
-							cartHandler("DELETE_FROM_CART", itemInCart, cartDispatch)
-						}
-					>
-						Remove from Cart
-					</button>
-					<button
-						onClick={() =>
-						wishlistHandler(itemInCart, wishlistDispatch)
-						}
-					>
-						Wishlist
-					</button>
-				</div>
-			))}
+			{!cartState.cartItems &&
+				cartState.cartItems.map((itemInCart) => (
+					<div id={itemInCart.id}>
+						<img src={itemInCart.image} alt="img"></img>
+						<h1>{itemInCart.name}</h1>
+						<strong>{itemInCart.price}</strong>
+						<button
+							onClick={() =>
+								cartHandler("REMOVE_FROM_CART", itemInCart, cartDispatch)
+							}
+						>
+							-
+						</button>
+						{itemInCart.quantity}
+						<button
+							onClick={() =>
+								cartHandler("ADD_TO_CART", itemInCart, cartDispatch)
+							}
+						>
+							+
+						</button>
+						<button
+							onClick={() =>
+								cartHandler("DELETE_FROM_CART", itemInCart, cartDispatch)
+							}
+						>
+							Remove from Cart
+						</button>
+						<button
+							onClick={() => wishlistHandler(itemInCart, wishlistDispatch)}
+						>
+							Wishlist
+						</button>
+					</div>
+				))}
+			{!!cartState.cartItems && <EmptyCart />}
 		</div>
 	);
 }

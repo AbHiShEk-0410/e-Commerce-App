@@ -1,0 +1,47 @@
+.empty {
+	height: 90vh;
+	min-height: 60vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: var(--calm-font);
+}
+.empty * {
+	margin-top: var(--hard-margin-gap);
+}
+.empty-banner {
+	width: 50vw;
+	z-index: var(--lower-z-index);
+}
+.primary-heading {
+	font-size: 3.5vw;
+	color: var(--primary-color);
+}
+.statement {
+	color: var(--ternary-color);
+	font-weight: lighter;
+	font-size: 1.4vw;
+}
+.start-shopping {
+	margin-top: var(--hard-margin-gap);
+	padding: var(--hard-padding-gap);
+	font-weight: 700;
+	font-size: 1vw;
+	margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+	.empty-banner {
+		width: 80vw;
+	}
+	.primary-heading {
+		font-size: 6vw;
+	}
+	.statement {
+		font-size: 2.5vw;
+	}
+	.start-shopping {
+		font-size: 3vw;
+	}
+}
