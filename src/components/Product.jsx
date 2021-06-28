@@ -14,6 +14,7 @@ import egg from "../images/egg.png";
 import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
+import { GiTakeMyMoney } from "react-icons/gi";
 export default function Product() {
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
@@ -71,7 +72,7 @@ export default function Product() {
 				);
 				wishlistDispatch(serverResponse.data.wishlist);
 			} catch (error) {
-				console.log(error)
+				console.log(error);
 				return [];
 			}
 		};

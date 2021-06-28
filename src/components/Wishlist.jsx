@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCart, useWishlist } from "../contexts/";
 import {
 	checkItemInObject,
@@ -10,6 +10,9 @@ import EmptyWishlist from "./EmptyWishlist";
 
 export default function Wishlist() {
 	const { wishlistState, wishlistDispatch } = useWishlist();
+	const [emptyToggle, setEmptyToggle] = useState(
+		wishlistState.wishlistItems === []
+	);
 	const { cartState } = useCart();
 
 	useEffect(() => {
@@ -32,10 +35,13 @@ export default function Wishlist() {
 		};
 		getWishlistFromServer();
 	}, [wishlistDispatch]);
+	useEffect(() => {
+		setEmptyToggle(wishlistState.wishlistItems.length === 0);
+	}, [wishlistState.wishlistItems]);
 
 	return (
 		<div>
-			{!wishlistState.wishlistItems &&
+			{!emptyToggle &&
 				wishlistState.wishlistItems.map((itemInWishlist) => (
 					<div id={itemInWishlist.id}>
 						<img src={itemInWishlist.image} alt="img"></img>
@@ -54,7 +60,7 @@ export default function Wishlist() {
 						</div>
 					</div>
 				))}
-			{!!wishlistState.wishlistItems && <EmptyWishlist />}
+			{emptyToggle && <EmptyWishlist />}
 		</div>
 	);
 }
