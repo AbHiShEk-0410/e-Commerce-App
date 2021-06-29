@@ -10,6 +10,7 @@
 	--ternary-color: #ff6994;
 	--grayish-black: #b3a2a2;
 	--background-color: white;
+	--scrollbarBG: #cfd8dc;
 	--font-color: black;
 	--gray: #404040;
 	--primary-background-color: rgb(255, 126, 131);
@@ -34,7 +35,7 @@
 	--soft-padding-gap: 5px;
 	--hard-padding-gap: 10px;
 	--harder-padding-gap: 1rem;
-	--lower-z-index:-2;
+	--lower-z-index: -2;
 	--primary-heading-font: "Roboto", sans-serif;
 	--qoute-font: "Work Sans", sans-serif;
 	--card-tile-font: "Poppins", sans-serif;
@@ -52,13 +53,29 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+
+*::-webkit-scrollbar {
+	width: 11px;
+}
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--primary-color) var(--scrollbarBG);
+}
+*::-webkit-scrollbar-track {
+	background: var(--scrollbarBG);
+}
+*::-webkit-scrollbar-thumb {
+	background-color: var(--primary-color);
+	border-radius: 6px;
+	border: 3px solid var(--scrollbarBG);
+}
 .App {
 	font-family: sans-serif;
 	text-align: center;
 }
 body {
 	background: var(--secondary-color);
-	overflow:visible;
+	overflow: visible;
 }
 .primary-button {
 	background: var(--primary-color);
