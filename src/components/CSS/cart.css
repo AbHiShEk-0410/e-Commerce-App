@@ -1,25 +1,27 @@
 .cart-page {
-	min-height: 100vh;
+	width: 70%;
+	margin: var(--hard-margin-gap) auto;
 	overflow: hidden;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+		rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 .cart-listing {
-	border: 1px solid yellow;
 	padding: 2rem;
 	display: grid;
 	height: 100vh;
+	width: auto;
 	grid-gap: 4em;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 .cart-items {
 	overflow-y: scroll;
-	border:1px solid blue;
-	padding:1rem;
-
+	padding: 1rem;
 }
 .cart-tile {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
+	min-width: 90%;
+	margin: auto;
 	align-items: center;
 	padding: var(--harder-padding-gap);
 	position: relative;
@@ -27,20 +29,19 @@
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .billing {
-	border: 1px solid red;
 	height: 500px;
-	position: sticky;
-	grid-column: span+1;
+	display: flex;
 }
 .item-img {
 	border-radius: 50%;
+	border: 1px solid black;
 	padding: var(--soft-padding-gap);
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
 		rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 	overflow: hidden;
 }
 .item-img img {
-	width: max(130px, 10vw);
+	width: max(130px, 8vw);
 }
 .item-desc {
 	display: flex;
@@ -50,7 +51,7 @@
 	color: var(--primary-color);
 	font-family: var(--card-tile-font);
 	font-weight: lighter;
-	font-size: max(30px, 4vw);
+	font-size: max(30px, 2vw);
 	align-self: flex-start;
 }
 .item-info {
@@ -59,16 +60,18 @@
 	justify-content: space-between;
 	align-items: center;
 }
-.item-info > .food-info {
-	justify-content: flex-start;
-}
 .food-info img {
 	width: max(23px, 2vw);
+}
+.add-to-wishlist {
+	cursor: pointer;
+	font-size: max(25px, 2vw);
 }
 .item-price {
 	display: flex;
 	align-items: center;
 	color: var(--primary-color);
+	justify-content: center;
 }
 .item-price * {
 	font-weight: lighter;
@@ -126,14 +129,115 @@
 	border-radius: 0 4px 0 32px;
 	overflow: hidden;
 }
-@media screen and (max-width:830px) {
-	.cart-page{
-		overflow:visible;
+.price-details {
+	width: 100%;
+	padding: var(--harder-padding-gap);
+	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+		rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.price-details .inline-div {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.item-price h3 {
+	font-size: max(23px, 2vw);
+}
+.safe-guard {
+	padding: 1rem;
+	background: url(//static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/shield_b33c0c.svg)
+		no-repeat 0 50%;
+}
+@media screen and (max-width: 511px) {
+	.cart-page {
+		padding: 0;
+		width: 100%;
 	}
-	.cart-items{
-		overflow-y: visible;
+	.cart-listing {
+		padding: 0;
 	}
-	.cart-listing{
+	.cart-items {
+		grid-column: span;
+		max-width: 100vw;
+	}
+	.cart-items * {
+		margin-bottom: var(--hard-margin-gap);
+	}
+	.item-img {
+		padding: 0;
+	}
+	.item-img img {
+		width: max(28.2vw, 90px);
+	}
+	.item-desc {
+		font-size: 12vw;
+	}
+
+	.cart-tile {
+		width: 200%;
+	}
+	.item-desc h1 {
+		font-size: 7vw;
+	}
+	.quantity-regulators button {
+		width: max(23px, 4.9vw);
+		height: max(23px, 4.9vw);
+		font-weight: lighter;
+		padding-bottom: var(--soft-padding-gap);
+	}
+	.quantity-regulators span {
+		font-weight: lighter;
+		font-size: max(15px, 3vw);
+		width: max(30px, 7.5vw);
+	}
+	.item-price {
+		margin-top: 16px;
+	}
+	.food-info img {
+		width: max(17px, 4.5vw);
+	}
+	.add-to-wishlist {
+		cursor: pointer;
+		font-size: max(17px, 4.5vw);
+	}
+	.item-price h3 {
+		font-size: max(10px, 4.5vw);
+	}
+}
+@media screen and (max-width: 719px) {
+	.cart-page {
+		width: 100%;
+	}
+	.cart-tile {
+		max-width: 100%;
+	}
+}
+@media screen and (max-width: 1500px) {
+	
+	.cart-items {
 		height: auto;
+		overflow-y: visible;
+		grid-column: span;
+	}
+	.cart-listing {
+		height: auto;
+	}
+	.billing {
+		vertical-align: middle;
+	}
+	.billing-tile {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+}
+@media screen and (min-width: 1500px) {
+	.cart-listing {
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	}
+	/* prettier-ignore  */
+	.cart-items {
+		grid-column: span+2;
 	}
 }

@@ -14,8 +14,8 @@ import egg from "../images/egg.png";
 import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
-import { GiTakeMyMoney } from "react-icons/gi";
 export default function Product() {
+	console.log(process.env.REACT_APP_SERVER_URL)
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
 	const {

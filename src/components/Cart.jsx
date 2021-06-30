@@ -12,6 +12,7 @@ import veg from "../images/veg.png";
 import nonveg from "../images/nonveg.png";
 import egg from "../images/egg.png";
 import { checkItemInObject } from "../utilities";
+import logo from "../images/front-logo.png";
 
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
@@ -80,9 +81,8 @@ export default function Cart() {
 												onClick={() =>
 													wishlistHandler(itemInCart, wishlistDispatch)
 												}
+												className="add-to-wishlist"
 												style={{
-													cursor: "pointer",
-													fontSize: "max(25px, 2vw)",
 													fill: checkItemInObject(
 														wishlistState.wishlistItems,
 														itemInCart
@@ -95,27 +95,13 @@ export default function Cart() {
 										<div>
 											{" "}
 											<span className="item-price">
-												<GiPayMoney
-													style={{
-														fontSize: "max(23px, 2vw)",
-														marginRight: "4px",
-														color: "var(--ternary-color)",
-														WebkitTransform: "scaleX(-1)",
-													}}
-												/>
 												<BiRupee
 													style={{
 														fontSize: "max(18px, 1.5vw)",
 														marginRight: "-4px",
 													}}
 												/>
-												<h3
-													style={{
-														fontSize: "max(23px, 2vw)",
-													}}
-												>
-													{itemInCart.price * itemInCart.quantity}
-												</h3>
+												<h3>{itemInCart.price * itemInCart.quantity}</h3>
 											</span>
 										</div>
 									</div>
@@ -154,7 +140,41 @@ export default function Cart() {
 							</div> //Parent div
 						))}
 				</div>
-				{balance !== 0 && <div className="billing">cvcv</div>}
+				{balance !== 0 && (
+					<div className="billing-tile">
+						<div className="billing">
+							<div className="price-details">
+								<h1>PRICE DETAILS</h1>
+								<hr />
+								<div className="inline-div">
+									<h2>Price ({cartState.cartItems.length} items)</h2>
+									<h2>
+										<BiRupee />
+										{balance}
+									</h2>
+								</div>
+								<div className="inline-div">
+									<h2>Delivery Charges</h2>
+									<h2>FREE</h2>
+								</div>
+								<hr />
+								<div className="inline-div">
+									<h2>Total Amount</h2>
+									<h2>
+										<BiRupee />
+										{balance}
+									</h2>
+								</div>
+								<div className="inline-div"></div>
+								<hr />
+								<div className=" safe-guard">
+									Safe and Secure Payments. Easy returns. 100% Authentic
+									products.
+								</div>
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 			{balance === 0 && <EmptyCart />}
 		</div>
