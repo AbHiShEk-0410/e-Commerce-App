@@ -11,47 +11,42 @@ loginRoute.use(jsonParser);
 loginRoute.post("/", loginParamCheck, async function (request, response) {
 	try {
 		const loginUser = request.loginUser;
-		if (loginUser.success) {
-			let { password: userEnteredPassword } = request.body;
-			const validation = await passwordValidation(
-				userEnteredPassword,
-				loginUser.userInfo.password
-			);
+		const { password: userEnteredPassword } = request.body;
 
-			if (validation.success && validation.result) {
-				const payload = {
-					name: loginUser.userInfo.name,
-					email: loginUser.userInfo.email,
-				};
-				const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET);
+		const validation = await passwordValidation(
+			userEnteredPassword,
+			loginUser.password
+		);
 
-				response.status(validation.status).send({
-					success: true,
-                    result :true,
-					token: accessToken,
-					message: "User successfully logged In!",
-				});
-			} else if (validation.success && !validation.result) {
-				response.status(validation.status).send({
-					success: true,
-					result: validation.result,
-					message: "Password does not match",
-				});
-			} else {
-				response.status(validation.status).send({
-					success: false,
-					message: validation.message,
-				});
-			}
+		if (validation.success && validation.result) {
+			const payload = {
+				name: loginUser.name,
+				email: loginUser.email,
+			};
+			const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET);
+
+			response.status(validation.status).send({
+				success: true,
+				token: accessToken,
+				message: "User successfully logged In!",
+			});
+		} else if (validation.success && !validation.result) {
+			response.status(validation.status).send({
+				success: false,
+				message: "Password does not match",
+			});
 		} else {
-			throw new Error(JSON.stringify(loginUser));
+			//If there is any error occured while comparing both hash values, the control will come here
+			//i.e. it will handle errors occured after calling "passwordValidation"
+			response.status(500).send({ validation }); //Internal Server Error
 		}
 	} catch (error) {
-		const { status, message } = JSON.parse(error.message);
-		response.status(status).send({
+		//If there is any error occured while calling the function "passwordValidation", the control will come here
+		//i.e. it will handle errors occured before/while calling "passwordValidation"
+		response.status(500).send({ 
 			success: false,
-			message: message,
-		});
+			message: error.message,
+		});//Internal Server Error
 	}
 });
 exports.loginRoute = loginRoute;

@@ -8,7 +8,6 @@ async function passwordValidation(userEnteredPassword, hashValue) {
 			result: isPasswordSame,
 		};
 	} catch (error) {
-		console.error(error);
 		return {
 			success: false,
 			message: error.message,

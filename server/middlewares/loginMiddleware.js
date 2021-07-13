@@ -1,45 +1,21 @@
 const { findUserInDb } = require("../utilities");
-
 function loginMiddleware(request, response, next) {
 	let { username, email, password } = request.body;
-	if (username !== undefined && password !== undefined) {
-		const userInfo = findUserInDb({
-			username,
-		});
-		userInfo === undefined
-			? (request.loginUser = {
-					success: false,
-					status: 404,
-					message: "User does not exist",
-			  })
-			: (request.loginUser = {
-					success: true,
-					userInfo,
-					user: username,
-			  });
-	} else if (email !== undefined && password !== undefined) {
-		const userInfo = findUserInDb({
-			email,
-		});
-		userInfo === undefined
-			? (request.loginUser = {
-					success: false,
-					status: 404,
-					message: "User does not exist",
-			  })
-			: (request.loginUser = {
-					success: true,
-					userInfo,
-                    
 
-			  });
+	if ((!!username || !!email) && !!password) {
+		//Because either of username or email and password require for login
+		const userInfo = findUserInDb(!!username ? { username } : { email });
+		if (!userInfo) {
+			response
+				.status(404)
+				.send({ success: false, message: "User does not exist" });
+		}
+		request.loginUser = userInfo;
+		next();
 	} else {
-		request.loginUser = {
-			success: false,
-			status: 400,
-			message: "Missing Parameters",
-		};
+		response
+			.status(400)
+			.send({ success: false, message: "Missing Parameters" });
 	}
-	next();
 }
 exports.loginMiddleware = loginMiddleware;
