@@ -16,7 +16,8 @@ export default function Login() {
 		setLogin(JSON.parse(localStorage.getItem("isUserLogin")));
 		//Navigate user from login route to product if already logged in otherwise to login
 		login ? navigate("/product") : navigate("/login");
-	}, [login, navigate, setLogin]);
+		console.log("I am running");
+	}, []);
 
 	useEffect(() => {
 		//Will help in enabling/disabling the Login button
