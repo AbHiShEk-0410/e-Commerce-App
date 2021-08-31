@@ -15,103 +15,95 @@ import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
 export default function Product() {
-	console.log(process.env.REACT_APP_SERVER_URL)
+	console.log(process.env.REACT_APP_SERVER_URL);
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
 	const {
 		state: { showFastDelivery, showInventory, sortBy },
 		dispatch,
 	} = useSortFilter();
-	const [data, setData] = useState([]);
+	const [data, setData] = useState({});
+	Object.keys(data).map((id) => console.log(data[id].name));
 
 	useEffect(() => {
 		const loadProducts = async () => {
 			try {
 				const response = await axios(
-					"https://database-1.joygupta1.repl.co/product"
+					process.env.REACT_APP_NEW_SERVER_URL + "/product"
 				);
+
 				setData(response.data.data);
 			} catch (error) {
-				console.log(error);
-				setData([]);
+				console.log(error.response.data);
 			}
 		};
 		loadProducts();
 	}, []);
-	useEffect(() => {
-		const getCartFromServer = async () => {
-			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-			try {
-				const serverResponse = await axios.get(
-					process.env.REACT_APP_SERVER_URL + "/cart",
-					{
-						headers: {
-							Authorization: `Bearer ${accessToken}`,
-						},
-					}
-				);
-				cartDispatch(serverResponse.data.cart);
-			} catch (error) {
-				console.log(error);
-				return [];
-			}
-		};
-		getCartFromServer();
-	}, [cartDispatch]);
-	useEffect(() => {
-		const getWishlistFromServer = async () => {
-			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-			try {
-				const serverResponse = await axios.get(
-					process.env.REACT_APP_SERVER_URL + "/wishlist",
-					{
-						headers: {
-							Authorization: `Bearer ${accessToken}`,
-						},
-					}
-				);
-				wishlistDispatch(serverResponse.data.wishlist);
-			} catch (error) {
-				console.log(error);
-				return [];
-			}
-		};
-		getWishlistFromServer();
-	}, [wishlistDispatch]);
+	// useEffect(() => {
+	// 	const getCartFromServer = async () => {
+	// 		const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+	// 		try {
+	// 			const serverResponse = await axios.get(
+	// 				process.env.REACT_APP_SERVER_URL + "/cart",
+	// 				{
+	// 					headers: {
+	// 						Authorization: `Bearer ${accessToken}`,
+	// 					},
+	// 				}
+	// 			);
+	// 			cartDispatch(serverResponse.data.cart);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 			return [];
+	// 		}
+	// 	};
+	// 	getCartFromServer();
+	// }, [cartDispatch]);
+	// useEffect(() => {
+	// 	const getWishlistFromServer = async () => {
+	// 		const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+	// 		try {
+	// 			const serverResponse = await axios.get(
+	// 				process.env.REACT_APP_SERVER_URL + "/wishlist",
+	// 				{
+	// 					headers: {
+	// 						Authorization: `Bearer ${accessToken}`,
+	// 					},
+	// 				}
+	// 			);
+	// 			wishlistDispatch(serverResponse.data.wishlist);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 			return [];
+	// 		}
+	// 	};
+	// 	getWishlistFromServer();
+	// }, [wishlistDispatch]);
 
 	return (
 		<>
 			<div>
 				{/* Product Listing */}
 				<div class="product-listing">
-					{data.map((itemInProduct) => (
-						<div class="product" key={itemInProduct.id}>
-							<img
-								class="product-image"
-								src={itemInProduct.img}
-								alt="img"
-							></img>
+					{Object.keys(data).map((id) => (
+						<div class="product" key={id}>
+							<img class="product-image" src={data[id].img} alt="img"></img>
 							<div class="product-parent">
 								<div class="product-info">
-									<h1 class="product-name">{itemInProduct.name}</h1>
+									<h1 class="product-name">{data[id].name}</h1>
 									<div class="price-tag">
 										<FaBalanceScale
 											style={{ fontSize: "26px", color: "#404040" }}
 										/>
 										<div class="product-pricing">
 											<BiRupee style={{ fontSize: "20px" }} />
-											<h2>{itemInProduct.price}</h2>
-											<h3>/{itemInProduct.unit}</h3>
+											<h2>{data[id].price}</h2>
+											<h3>/{data[id].unit}</h3>
 										</div>
 									</div>
 									<div class="delivery-status">
 										<FiTruck style={{ fontSize: "26px", color: "#404040" }} />
-										<h2>
-											{itemInProduct.delivery === null
-												? "4-7+"
-												: itemInProduct.delivery}{" "}
-											Days
-										</h2>
+										<h2>{data[id].delivery === null ? "4-7+" : data[id].delivery} Days</h2>
 									</div>
 								</div>
 								<div class="product-type">
@@ -119,26 +111,21 @@ export default function Product() {
 										<img
 											width="17%"
 											src={
-												itemInProduct.type === "vegetable"
+												data[id].type === "vegetable"
 													? veg
-													: itemInProduct.type === "non-veg"
+													: data[id].type === "non-veg"
 													? nonveg
-													: itemInProduct.type === "Spices"
+													: data[id].type === "Spices"
 													? veg
 													: egg
 											}
 											alt="food type"
 										/>
 										<FiBookmark
-											onClick={() =>
-												wishlistHandler(itemInProduct, wishlistDispatch)
-											}
+											onClick={() => wishlistHandler(id, wishlistDispatch)}
 											style={{
 												fontSize: "26px",
-												fill: checkItemInObject(
-													wishlistState.wishlistItems,
-													itemInProduct
-												)
+												fill: checkItemInObject(wishlistState.wishlistItems, id)
 													? "#0b002a"
 													: "white",
 											}}
@@ -147,8 +134,8 @@ export default function Product() {
 								</div>
 							</div>
 							{CartButtonHandler(
-								checkItemInObject(cartState.cartItems, itemInProduct),
-								itemInProduct
+								checkItemInObject(cartState.cartItems, id),
+								id
 							)}
 						</div>
 					))}
