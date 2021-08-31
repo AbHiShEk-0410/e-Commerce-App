@@ -1,1 +1,4 @@
 GET http://localhost:5001/bakeful-23873/us-central1/app
+
+###
+GET http://localhost:5001/bakeful-23873/us-central1/product
