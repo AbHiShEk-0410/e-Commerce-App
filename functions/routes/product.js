@@ -1,7 +1,9 @@
 const admin = require("firebase-admin");
 const express = require("express");
+const cors = require("cors");
 // eslint-disable-next-line new-cap
 const productRoute = express.Router();
+productRoute.use(cors({ origin: true }));
 productRoute.get("/", async (request, response) => {
 	try {
 		const snapshot = await admin.firestore().collection("products").get();

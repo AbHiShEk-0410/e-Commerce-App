@@ -5,10 +5,9 @@ const cors = require("cors");
 admin.initializeApp();
 const {productRoute} = require("./routes");
 const app = express();
-app.use(cors());
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
+app.use(cors({origin: true}));
+
+
 exports.product = functions.https.onRequest(productRoute);
 exports.app = functions.https.onRequest((request, response) => {
   functions.logger.info("Hello logs!", {structuredData: true});
