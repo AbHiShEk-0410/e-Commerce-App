@@ -22,7 +22,26 @@ export async function cartHandler(query, productDetails, cartDispatch) {
 				cartDispatch([]);
 			}
 			break;
-
+		case "INCREASE_COUNT":
+			try {
+				alert("running");
+				const serverReponse = await axios.post(
+					process.env.REACT_APP_SERVER_URL + "/cart/increase-count",
+					{
+						product: productDetails,
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				);
+				console.log("serverReponse", serverReponse);
+				cartDispatch(serverReponse.data.userInfo.cart);
+			} catch (error) {
+				console.log(error);
+			}
+			break;
 		case "REMOVE_FROM_CART":
 			try {
 				const serverReponse = await axios.delete(
@@ -36,6 +55,8 @@ export async function cartHandler(query, productDetails, cartDispatch) {
 						},
 					}
 				);
+				console.log(serverReponse);
+
 				cartDispatch(
 					serverReponse.data.userInfo
 						? serverReponse.data.serverReponse.cart

@@ -126,7 +126,7 @@ export default function Cart() {
 
 										<button
 											onClick={() =>
-												cartHandler("ADD_TO_CART", itemInCart, cartDispatch)
+												cartHandler("INCREASE_COUNT", itemInCart, cartDispatch)
 											}
 										>
 											+
