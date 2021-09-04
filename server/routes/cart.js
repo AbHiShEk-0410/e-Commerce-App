@@ -5,12 +5,7 @@ const cartRoute = express.Router();
 const { User } = require("../models/user.model");
 cartRoute.use(jsonParser);
 const { authorization, requestMiddleware } = require("../middlewares");
-const {
-	findUserInDb,
-	addToCart,
-	removeFromCart,
-	deletefromCart,
-} = require("../utilities");
+
 cartRoute.get("/", authorization, async function (request, response) {
 	const { _id } = request;
 	try {
