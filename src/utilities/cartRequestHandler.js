@@ -16,10 +16,10 @@ export async function cartHandler(query, productDetails, cartDispatch) {
 						},
 					}
 				);
-				console.log(serverReponse);
 				cartDispatch(serverReponse.data.userInfo.cart);
 			} catch (error) {
 				console.log(error.response);
+				cartDispatch([]);
 			}
 			break;
 
@@ -36,15 +36,20 @@ export async function cartHandler(query, productDetails, cartDispatch) {
 						},
 					}
 				);
-				cartDispatch(serverReponse.data.userInfo.cart);
+				cartDispatch(
+					serverReponse.data.userInfo
+						? serverReponse.data.serverReponse.cart
+						: []
+				);
 			} catch (error) {
 				console.log(error.response);
+				cartDispatch([]);
 			}
 			break;
 
 		case "DELETE_FROM_CART":
 			try {
-				const serverReponse = await axios.delete(
+				const sv = await axios.delete(
 					process.env.REACT_APP_SERVER_URL + "/cart/delete-from-cart",
 
 					{
@@ -56,9 +61,11 @@ export async function cartHandler(query, productDetails, cartDispatch) {
 						},
 					}
 				);
-				cartDispatch(serverReponse.data.userInfo.cart);
+
+				cartDispatch(sv.data.data);
 			} catch (error) {
-				console.log(error.response.data);
+				console.log(error);
+				cartDispatch([]);
 			}
 			break;
 

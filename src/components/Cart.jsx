@@ -40,6 +40,7 @@ export default function Cart() {
 						},
 					}
 				);
+				console.log(serverResponse.data)
 				cartDispatch(serverResponse.data.cart);
 			} catch (error) {
 				console.log(error.response.data);
@@ -47,7 +48,8 @@ export default function Cart() {
 			}
 		};
 		getCartFromServer();
-	}, [cartDispatch, cartState]);
+	}, [cartDispatch]);
+	console.log(cartState.cartItems);
 
 	return (
 		// For whole page
@@ -57,7 +59,7 @@ export default function Cart() {
 					{balance !== 0 &&
 						cartState.cartItems.map((itemInCart) => (
 							//For particular item
-							<div className="cart-tile" id={itemInCart.id}>
+							<div className="cart-tile" id={itemInCart._id}>
 								<div className="item-img">
 									<img src={itemInCart.img} alt="img"></img>
 								</div>
@@ -110,7 +112,9 @@ export default function Cart() {
 										<button
 											onClick={() =>
 												cartHandler(
-													"REMOVE_FROM_CART",
+													itemInCart.quantity === 1
+														? "DELETE_FROM_CART"
+														: "REMOVE_FROM_CART",
 													itemInCart,
 													cartDispatch
 												)

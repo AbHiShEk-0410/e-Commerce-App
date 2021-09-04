@@ -13,9 +13,8 @@ import nonveg from "../images/nonveg.png";
 import egg from "../images/egg.png";
 import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
-import { BiRupee } from "react-icons/bi";
+import { BiRupee, BiWindows } from "react-icons/bi";
 export default function Product() {
-	console.log(process.env.REACT_APP_SERVER_URL);
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
 
@@ -24,7 +23,7 @@ export default function Product() {
 		dispatch,
 	} = useSortFilter();
 	const [data, setData] = useState([]);
-	console.log(data);
+
 	useEffect(() => {
 		const loadProducts = async () => {
 			try {
@@ -51,6 +50,7 @@ export default function Product() {
 						},
 					}
 				);
+
 				cartDispatch(serverResponse.data.cart);
 			} catch (error) {
 				console.log(error);
@@ -58,7 +58,7 @@ export default function Product() {
 			}
 		};
 		getCartFromServer();
-	}, [cartDispatch]);
+	}, [cartDispatch, cartState.cartItems]);
 	useEffect(() => {
 		const getWishlistFromServer = async () => {
 			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
@@ -71,7 +71,10 @@ export default function Product() {
 						},
 					}
 				);
+				
+
 				wishlistDispatch(serverResponse.data.wishlist);
+				window.location.reload();
 			} catch (error) {
 				console.log(error);
 				return [];
@@ -86,7 +89,7 @@ export default function Product() {
 				{/* Product Listing */}
 				<div class="product-listing">
 					{data.map((itemInProduct) => (
-						<div class="product" key={itemInProduct.id}>
+						<div class="product" key={itemInProduct._id}>
 							<img
 								class="product-image"
 								src={itemInProduct.img}
