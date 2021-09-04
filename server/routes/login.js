@@ -3,8 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const jwt = require("jsonwebtoken");
+
 const { passwordValidation } = require("../utilities");
 const { loginParamCheck } = require("../middlewares");
+const { User } = require("../models/user.model");
 
 const loginRoute = express.Router();
 loginRoute.use(jsonParser);
@@ -20,14 +22,13 @@ loginRoute.post("/", loginParamCheck, async function (request, response) {
 
 		if (validation.success && validation.result) {
 			const payload = {
-				name: loginUser.name,
-				email: loginUser.email,
+				id: loginUser.id,
 			};
 			const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET);
-
+			console.log(validation, accessToken);
 			response.status(validation.status).send({
 				success: true,
-				token: accessToken,
+				accessToken,
 				message: "User successfully logged In!",
 			});
 		} else if (validation.success && !validation.result) {
@@ -36,17 +37,13 @@ loginRoute.post("/", loginParamCheck, async function (request, response) {
 				message: "Password does not match",
 			});
 		} else {
-			//If there is any error occured while comparing both hash values, the control will come here
-			//i.e. it will handle errors occured after calling "passwordValidation"
-			response.status(500).send({ validation }); //Internal Server Error
+			response.status(501).send({ validation });
 		}
 	} catch (error) {
-		//If there is any error occured while calling the function "passwordValidation", the control will come here
-		//i.e. it will handle errors occured before/while calling "passwordValidation"
-		response.status(500).send({ 
+		response.status(500).send({
 			success: false,
 			message: error.message,
-		});//Internal Server Error
+		});
 	}
 });
 exports.loginRoute = loginRoute;

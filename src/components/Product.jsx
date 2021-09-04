@@ -15,15 +15,16 @@ import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
 export default function Product() {
-	console.log(process.env.REACT_APP_SERVER_URL)
+	console.log(process.env.REACT_APP_SERVER_URL);
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
+
 	const {
 		state: { showFastDelivery, showInventory, sortBy },
 		dispatch,
 	} = useSortFilter();
 	const [data, setData] = useState([]);
-
+	console.log(data);
 	useEffect(() => {
 		const loadProducts = async () => {
 			try {

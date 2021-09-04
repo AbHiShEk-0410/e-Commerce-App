@@ -4,6 +4,7 @@ const jsonParser = bodyParser.json();
 var { users } = require("../database/usersDB");
 const { findUserInDb, passwordValidation } = require("../utilities");
 const { encryption } = require("../utilities/encryption");
+const { authorization } = require("../middlewares");
 
 const userRoute = express.Router();
 userRoute.use(jsonParser);
@@ -15,39 +16,55 @@ userRoute.get("/", function (request, response) {
 	}, 2000);
 });
 
-userRoute.post("/validate", function (request, response) {
+//Security-question : Check if username or mail exist or not
+userRoute.post("/validate", async function (request, response) {
 	const data = request.body;
 	if (!data.email && !data.username) {
 		response
 			.status(400)
 			.send({ success: false, message: "Missing Parameters" });
 	}
-	const userData = findUserInDb(data);
-	if (!userData) {
+	try {
+		const userData = await findUserInDb(data);
+		if (!userData) {
+			response
+				.status(404)
+				.send({ success: false, message: "User does not exist!" });
+		}
+		response.status(200).send({ success: true, data: { _id: userData._id } });
+	} catch (error) {
 		response
-			.status(404)
-			.send({ success: false, message: "User does not exist!" });
+			.status(500)
+			.send({ success: false, message: "Internal server Error" });
 	}
-	response.status(200).send({ success: true, data: { id: userData.id } });
-});
-userRoute.get("/security-question/:id", function (request, response) {
-	const id = parseInt(request.params.id);
-	const userData = findUserInDb({ id });
-	if (!userData) {
-		response
-			.status(404)
-			.send({ success: false, message: "User does not exist!" });
-	}
-	response.status(200).send({
-		success: true,
-		data: {
-			id: userData.id,
-			name: userData.name,
-			question: userData.question,
-		},
-	});
 });
 
+//Security-question : If exists, send security question
+userRoute.get("/security-question/:id", async function (request, response) {
+	const _id = parseInt(request.params.id);
+	try {
+		const userData = await findUserInDb({ _id });
+		if (!userData) {
+			response
+				.status(404)
+				.send({ success: false, message: "User does not exist!" });
+		}
+		response.status(200).send({
+			success: true,
+			data: {
+				_id: userData._id,
+				name: userData.name,
+				question: userData.question,
+			},
+		});
+	} catch (error) {
+		response
+			.status(500)
+			.send({ success: false, message: "Internal server Error" });
+	}
+});
+
+//Security-question : Check answer of security question
 userRoute.post(
 	"/security-answer-validation",
 	async function (request, response) {
@@ -83,6 +100,8 @@ userRoute.post(
 		}
 	}
 );
+
+//Security-question : If true then reset
 userRoute.post("/reset-password", async function (request, response) {
 	const data = request.body;
 	if (!data.password || !data.id) {
@@ -113,6 +132,13 @@ userRoute.post("/reset-password", async function (request, response) {
 			}
 		}
 	}
+});
+
+//This is going to be useful for later part
+//As of now we are not putting token in cookies, once we done that then there is a point of checking token
+userRoute.get("/check-token", authorization, function (request, response) {
+	const { payload } = request;
+	response.status(200).send({ success: true, payload });
 });
 
 exports.userRoute = userRoute;

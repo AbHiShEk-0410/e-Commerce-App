@@ -1,10 +1,13 @@
-const express = require('express');
-const {products} = require("../database/productsDB")
+const express = require("express");
 const productRoute = express.Router();
+const { Product } = require("../models/product.model");
 
-productRoute.get("/", function(request, response){
-	setTimeout((() => {
-response.status(200).send({data : products})
-}), 2000)
-	})
-exports.productRoute = productRoute
+productRoute.get("/", async function (request, response) {
+	try {
+		const serverResponse = await Product.find({});
+		response.send({ data: serverResponse });
+	} catch (error) {
+		response.status(500).send({ success: false, message: error });
+	}
+});
+exports.productRoute = productRoute;
