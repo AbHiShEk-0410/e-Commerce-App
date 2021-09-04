@@ -22,7 +22,7 @@ loginRoute.post("/", loginParamCheck, async function (request, response) {
 
 		if (validation.success && validation.result) {
 			const payload = {
-				id: loginUser.id,
+				_id: loginUser._id,
 			};
 			const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET);
 			console.log(validation, accessToken);

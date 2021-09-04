@@ -3,9 +3,11 @@ const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const wishlistRoute = express.Router();
 const { findUserInDb } = require("../utilities");
+
 wishlistRoute.use(jsonParser);
 const { authorization, requestMiddleware } = require("../middlewares");
 wishlistRoute.get("/", authorization, function (request, response) {
+	console.log("run");
 	const payload = request.payload;
 	const userInfo = findUserInDb({ id: payload.id });
 	response.status(200).send({ success: true, wishlist: userInfo.wishlist });
@@ -24,7 +26,7 @@ wishlistRoute.post(
 				(item) => item.id !== product.id
 			);
 		}
-		response.status(200).send({ success: true, wishlist: userInfo.wishlist });
+		response.status(200).send({ success: true, userInfo });
 	}
 );
 exports.wishlistRoute = wishlistRoute;
