@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const { users } = require("../database/usersDB");
 const { signupParamsCheck, emailValidation } = require("../middlewares");
 const { encrypt } = require("../utilities");
+const { User } = require("../models/user.model");
 
 const jsonParser = bodyParser.json();
 const signupRoute = express.Router();
@@ -19,21 +20,28 @@ signupRoute.post(
 			const encryptedAnswer = await encrypt(answer);
 
 			if (encryptedPassword.success && encryptedAnswer.success) {
-				users.push({
-					id: users.length,
+				const user = {
 					name,
-					username: undefined,
+					username: null,
 					email,
 					password: encryptedPassword.hash,
 					question,
 					answer: encryptedAnswer.hash,
 					wishlist: [],
 					cart: [],
-				});
-				response.status(201).send({
-					success: true,
-					message: "User has been registered to our database",
-				});
+				};
+				console.log(user);
+
+				try {
+					const NewUser = new User(user);
+					await NewUser.save();
+					response.status(201).send({
+						success: true,
+						message: "User has been registered to our database",
+					});
+				} catch (error) {
+					response.status(500).send({ success: false, message: error });
+				}
 			} else if (!encryptedPassword.success) {
 				response
 					.status(500)

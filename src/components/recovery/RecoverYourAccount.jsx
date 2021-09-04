@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { password } from "../../constants";
 import { queryStringToObject } from "../../utilities";
-
+import { Navigate } from "react-router";
 export default function RecoverYourAccount() {
 	const [userInput, setUserInput] = useState({
 		password: undefined,
@@ -26,29 +26,28 @@ export default function RecoverYourAccount() {
 	}, []);
 
 	useEffect(() => {
-		if (!password.expression.test(userInput.password)) {
-			console.log(password.warning);
-			setDisableButton(true);
+		if (userInput.password === userInput.confirmPassword) {
+			setDisableButton(false);
 		} else {
-			if (userInput.password === userInput.confirmPassword) {
-				setDisableButton(false);
-			} else {
-				setDisableButton(true);
-				console.log("Password does not match");
-			}
+			setDisableButton(true);
+			console.log("Password does not match");
 		}
 	}, [userInput]);
-
+	console.log(disableButton);
 	async function changePassword() {
 		try {
+			alert("Running");
+
 			const serverReponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/user/reset-password",
 				{
-					id: searchObj.userId,
+					_id: searchObj.userId,
 					password: userInput.password,
 				}
 			);
+
 			console.log(serverReponse);
+			navigate("/login");
 		} catch (error) {
 			console.log(error.response.data);
 		}

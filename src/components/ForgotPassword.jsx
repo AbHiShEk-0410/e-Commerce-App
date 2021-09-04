@@ -2,7 +2,7 @@ import "./CSS/forgot-password.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { queryStringToObject, checkUserId } from "../utilities";
+import { queryStringToObject } from "../utilities";
 import { recovery } from "./recovery";
 import { containerVariants } from "../constants";
 import { Error404 } from "./";
@@ -26,16 +26,11 @@ export default function ForgotPassword() {
 			setRecoveryTile("findYourAccount");
 		} else if (
 			!!urlObject.userId &&
-			checkUserId(urlObject.userId) &&
 			urlObject.reset === "true" &&
 			Object.keys(urlObject).length === 2
 		) {
 			setRecoveryTile("recoverYourAccount");
-		} else if (
-			!!urlObject.userId &&
-			checkUserId(urlObject.userId) &&
-			Object.keys(urlObject).length === 1
-		) {
+		} else if (!!urlObject.userId && Object.keys(urlObject).length === 1) {
 			setRecoveryTile("verifyYourAccount");
 		} else {
 			setRecoveryTile("error");

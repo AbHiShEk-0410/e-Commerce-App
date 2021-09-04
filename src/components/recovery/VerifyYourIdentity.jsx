@@ -29,7 +29,7 @@ export default function VerifyYourIdentity() {
 			const serverResponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/user/security-answer-validation",
 				{
-					id: searchObj.userId,
+					_id: searchObj.userId,
 					answer: userInput,
 				}
 			);

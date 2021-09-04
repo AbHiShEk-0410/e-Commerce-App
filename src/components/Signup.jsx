@@ -2,10 +2,11 @@ import "./CSS/signup.css";
 import signup_banner from "../images/singup_banner.png";
 import front_logo from "../images/front-logo.png";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkSignupParams } from "../utilities";
 import axios from "axios";
 export default function Signup() {
+	const navigate = useNavigate();
 	const [userDetails, setUserDetails] = useState({});
 	const [signupParamsOK, setSignupParamsOK] = useState(false);
 	useEffect(() => {
@@ -13,6 +14,7 @@ export default function Signup() {
 	}, [userDetails]);
 
 	async function userSignup(event) {
+		alert("Trigger");
 		event.preventDefault();
 		try {
 			const serverResponse = await axios.post(
@@ -25,6 +27,7 @@ export default function Signup() {
 					answer: userDetails.answer.toLowerCase(),
 				}
 			);
+			if (serverResponse.success) navigate("/login");
 		} catch ({ response }) {
 			console.log(response.data.message);
 		}
@@ -128,7 +131,7 @@ export default function Signup() {
 								required
 							></input>
 							<input
-								// disabled={!signupParamsOK}
+								disabled={!signupParamsOK}
 								className="login-button"
 								type="submit"
 								value="Sign Up"

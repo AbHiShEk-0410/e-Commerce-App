@@ -20,7 +20,8 @@ export default function FindYourAccount() {
 						[userInputType.type]: userInput,
 					}
 				);
-				navigate(`/forgot-password?userId=${userData.data.id}`);
+				console.log("/forgot-password?userId=" + userData.data._id);
+				navigate("/forgot-password?userId=" + userData.data._id);
 			} catch (error) {
 				console.log("Error ", error.response.data.message);
 			}
