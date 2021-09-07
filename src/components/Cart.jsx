@@ -16,7 +16,6 @@ import logo from "../images/front-logo.png";
 
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
-
 	const { wishlistState, wishlistDispatch } = useWishlist();
 	const [balance, setBalance] = useState(0);
 
