@@ -71,7 +71,6 @@ export default function Product() {
 						},
 					}
 				);
-				
 
 				wishlistDispatch(serverResponse.data.wishlist);
 				window.location.reload();
@@ -84,80 +83,72 @@ export default function Product() {
 	}, [wishlistDispatch]);
 
 	return (
-		<>
-			<div>
-				{/* Product Listing */}
-				<div class="product-listing">
-					{data.map((itemInProduct) => (
-						<div class="product" key={itemInProduct._id}>
-							<img
-								class="product-image"
-								src={itemInProduct.img}
-								alt="img"
-							></img>
-							<div class="product-parent">
-								<div class="product-info">
-									<h1 class="product-name">{itemInProduct.name}</h1>
-									<div class="price-tag">
-										<FaBalanceScale
-											style={{ fontSize: "26px", color: "#404040" }}
-										/>
-										<div class="product-pricing">
-											<BiRupee style={{ fontSize: "20px" }} />
-											<h2>{itemInProduct.price}</h2>
-											<h3>/{itemInProduct.unit}</h3>
-										</div>
-									</div>
-									<div class="delivery-status">
-										<FiTruck style={{ fontSize: "26px", color: "#404040" }} />
-										<h2>
-											{itemInProduct.delivery === null
-												? "4-7+"
-												: itemInProduct.delivery}{" "}
-											Days
-										</h2>
-									</div>
-								</div>
-								<div class="product-type">
-									<div class="food-type">
-										<img
-											width="17%"
-											src={
-												itemInProduct.type === "vegetable"
-													? veg
-													: itemInProduct.type === "non-veg"
-													? nonveg
-													: itemInProduct.type === "Spices"
-													? veg
-													: egg
-											}
-											alt="food type"
-										/>
-										<FiBookmark
-											onClick={() =>
-												wishlistHandler(itemInProduct, wishlistDispatch)
-											}
-											style={{
-												fontSize: "26px",
-												fill: checkItemInObject(
-													wishlistState.wishlistItems,
-													itemInProduct
-												)
-													? "#0b002a"
-													: "white",
-											}}
-										/>
-									</div>
+		<div>
+			{/* Product Listing */}
+			<div class="product-listing">
+				{data.map((itemInProduct) => (
+					<div class="product" key={itemInProduct._id}>
+						<img class="product-image" src={itemInProduct.img} alt="img"></img>
+						<div className="product-item-desc">
+							<div className="product-info">
+								<h1 class="product-name">{itemInProduct.name}</h1>
+								<div class="food-type">
+									<img
+										src={
+											itemInProduct.type === "vegetable"
+												? veg
+												: itemInProduct.type === "non-veg"
+												? nonveg
+												: itemInProduct.type === "Spices"
+												? veg
+												: egg
+										}
+										alt="food type"
+									/>
+									<FiBookmark
+										onClick={() =>
+											wishlistHandler(itemInProduct, wishlistDispatch)
+										}
+										style={{
+											fontSize: "26px",
+											fill: checkItemInObject(
+												wishlistState.wishlistItems,
+												itemInProduct
+											)
+												? "#0b002a"
+												: "white",
+										}}
+									/>
 								</div>
 							</div>
-							{CartButtonHandler(
-								checkItemInObject(cartState.cartItems, itemInProduct),
-								itemInProduct
-							)}
+							<div className="product-info">
+								<FaBalanceScale
+									style={{ fontSize: "26px", color: "#404040" }}
+								/>
+								<div class="rate-delivery">
+									<BiRupee style={{ fontSize: "20px" }} />
+									<span>
+										{itemInProduct.price}/{itemInProduct.unit}
+									</span>
+								</div>
+							</div>
+							<div className="product-info">
+								<FiTruck style={{ fontSize: "26px", color: "#404040" }} />
+								<span class="rate-delivery">
+									{itemInProduct.delivery === null
+										? "4-7+"
+										: itemInProduct.delivery}{" "}
+									Days
+								</span>
+							</div>
 						</div>
-					))}
-				</div>
+						{CartButtonHandler(
+							checkItemInObject(cartState.cartItems, itemInProduct),
+							itemInProduct
+						)}
+					</div> //Product div
+				))}
 			</div>
-		</>
+		</div>
 	);
 }

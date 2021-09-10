@@ -6,17 +6,17 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
 	const { cartDispatch } = useCart();
 	if (isItemInCart) {
 		return (
-			<>
+			<div>
 				<Link to="/cart">
 					<button class="from-product view-cart ">
 						<FiShoppingCart /> View Cart
 					</button>
 				</Link>
-			</>
+			</div>
 		);
 	}
 	return (
-		<>
+		<div>
 			<button
 				class="from-product to-cart"
 				type="button"
@@ -24,6 +24,6 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
 			>
 				+ Add to Cart
 			</button>
-		</>
+		</div>
 	);
 }
