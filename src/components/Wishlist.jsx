@@ -27,7 +27,7 @@ export default function Wishlist() {
 						},
 					}
 				);
-				wishlistDispatch(serverResponse.data.wishlist);
+				wishlistDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error);
 				return [];

@@ -37,7 +37,7 @@ export default function Cart() {
 						},
 					}
 				);
-				cartDispatch(serverResponse.data.cart);
+				cartDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error.response.data);
 				return [];

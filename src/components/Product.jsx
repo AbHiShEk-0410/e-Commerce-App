@@ -51,14 +51,14 @@ export default function Product() {
 					}
 				);
 
-				cartDispatch(serverResponse.data.cart);
+				cartDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error);
-				return [];
 			}
 		};
 		getCartFromServer();
-	}, [cartDispatch, cartState.cartItems]);
+	}, [cartDispatch]);
+
 	useEffect(() => {
 		const getWishlistFromServer = async () => {
 			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
@@ -73,10 +73,8 @@ export default function Product() {
 				);
 
 				wishlistDispatch(serverResponse.data.wishlist);
-				window.location.reload();
 			} catch (error) {
 				console.log(error);
-				return [];
 			}
 		};
 		getWishlistFromServer();
@@ -107,10 +105,20 @@ export default function Product() {
 									/>
 									<FiBookmark
 										onClick={() =>
-											wishlistHandler(itemInProduct, wishlistDispatch)
+											wishlistHandler(
+												checkItemInObject(
+													wishlistState.wishlistItems,
+													itemInProduct
+												)
+													? "REMOVE_FROM_WISHLIST"
+													: "ADD_TO_WISHLIST",
+												itemInProduct,
+												wishlistDispatch
+											)
 										}
 										style={{
 											fontSize: "26px",
+											cursor: "pointer",
 											fill: checkItemInObject(
 												wishlistState.wishlistItems,
 												itemInProduct

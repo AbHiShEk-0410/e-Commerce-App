@@ -7,11 +7,12 @@ function CartReducer(cartState, newCart) {
 		cartItems: newCart,
 	};
 }
-export function CartProvider({ children }) {
 
+export function CartProvider({ children }) {
 	const [cartState, cartDispatch] = useReducer(CartReducer, {
 		cartItems: [],
 	});
+
 	return (
 		<CartContext.Provider value={{ cartState, cartDispatch }}>
 			{children}
