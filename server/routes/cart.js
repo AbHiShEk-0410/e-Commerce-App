@@ -7,11 +7,10 @@ cartRoute.use(jsonParser);
 const { authorization, requestMiddleware } = require("../middlewares");
 
 cartRoute.get("/", authorization, async function (request, response) {
-	//Returns the cart of a particular user
 	const { _id } = request;
 	try {
 		const serverResponse = await User.findById(_id);
-		response.status(200).send({ success: true, cart: serverResponse.cart });
+		response.status(200).send({ success: true, data: serverResponse.cart });
 	} catch (error) {
 		response
 			.status(500)
@@ -23,9 +22,9 @@ cartRoute.post(
 	authorization,
 	requestMiddleware,
 	async function (request, response) {
-		//It only adds an item to the cart
 		try {
 			const { userInfo, product } = request;
+
 			const serverResponse = await User.findOneAndUpdate(
 				{ _id: userInfo._id },
 				{
@@ -38,7 +37,7 @@ cartRoute.post(
 			response.status(200).send({
 				success: true,
 				message: "Item added successfully!",
-				serverResponse,
+				data: serverResponse.cart,
 			});
 		} catch (error) {
 			response
@@ -48,8 +47,6 @@ cartRoute.post(
 	}
 );
 function updatingCart(type, cart, product) {
-	// It is to run 2 different queries based on "type" to increase or decrease the quantity
-
 	if (type === "inc") {
 		const temp = cart.map((item) => {
 			if (item._id === product._id)
@@ -81,9 +78,11 @@ cartRoute.post(
 				{ cart: updatedCart },
 				{ returnOriginal: false }
 			);
-			response.status(200).send({ success: true, data: serverResponse });
+
+			response.status(200).send({ success: true, data: serverResponse.cart });
 		} catch (error) {
 			console.log(error);
+
 			response.status(500).send({ sucess: false, message: "INternalSErver" });
 		}
 	}
@@ -103,8 +102,8 @@ cartRoute.post(
 				{ cart: updatedCart },
 				{ returnOriginal: false }
 			);
-			console.log("Updated Db looks like ", serverResponse);
-			response.status(200).send({ success: true, data: serverResponse });
+
+			response.status(200).send({ success: true, data: serverResponse.cart });
 		} catch (error) {
 			console.log(error);
 
@@ -112,25 +111,7 @@ cartRoute.post(
 		}
 	}
 );
-cartRoute.delete(
-	"/remove-from-cart",
-	authorization,
-	requestMiddleware,
-	async function (request, response) {
-		try {
-			const { userInfo, product } = request;
-			const serverResponse = await User.findOneAndUpdate(
-				{ _id: userInfo._id, "cart._id": cart.product._id },
-				{ $dec: { "cart.$.quantity": 1 } },
-				{ returnOriginal: false }
-			);
 
-			response.status(200).send({ success: true, data: serverResponse });
-		} catch (error) {
-			response.status(500).send({ sucess: false, message: "INternalSErver" });
-		}
-	}
-);
 cartRoute.delete(
 	"/delete-from-cart",
 	authorization,
