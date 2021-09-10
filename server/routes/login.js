@@ -3,13 +3,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
 const jwt = require("jsonwebtoken");
-
 const { passwordValidation } = require("../utilities");
 const { loginParamCheck } = require("../middlewares");
-const { User } = require("../models/user.model");
 
 const loginRoute = express.Router();
 loginRoute.use(jsonParser);
+
 loginRoute.post("/", loginParamCheck, async function (request, response) {
 	try {
 		const loginUser = request.loginUser;

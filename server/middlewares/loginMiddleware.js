@@ -1,14 +1,14 @@
 const { findUserInDb } = require("../utilities");
 async function loginMiddleware(request, response, next) {
-	let { username, email, password } = request.body;
+	//It is to check whether the required login params are being send or not
 
+	let { username, email, password } = request.body;
 	if ((!!username || !!email) && !!password) {
 		//Because either of username or email and password require for login
 		try {
 			const userInfo = await findUserInDb(
 				!!username ? { username } : { email }
 			);
-			console.log("USERINFOR", userInfo);
 			if (!userInfo) {
 				response
 					.status(404)

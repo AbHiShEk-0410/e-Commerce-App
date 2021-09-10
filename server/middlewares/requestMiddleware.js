@@ -1,5 +1,7 @@
 const { findUserInDb } = require("../utilities");
 async function requestMiddleware(request, response, next) {
+	// This middleware is to check whether the required params were sent by user or not
+
 	const userId = request.payload.id;
 	try {
 		const userInfo = await findUserInDb({ id: userId });
@@ -9,8 +11,6 @@ async function requestMiddleware(request, response, next) {
 				.send({ success: false, message: "user does not eixts" });
 		}
 		const product = request.body.product;
-		console.log(request.body);
-		console.log(product);
 		if (
 			!product.id ||
 			!product.name ||
