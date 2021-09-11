@@ -4,7 +4,7 @@ import { useCart, useWishlist } from "../../contexts";
 import {
 	checkItemInObject,
 	wishlistHandler,
-	CartButtonHandler,
+
 } from "../../utilities";
 import EmptyWishlist from "../EmptyWishlist/EmptyWishlist";
 
@@ -52,12 +52,7 @@ export default function Wishlist() {
 						>
 							Wishlist
 						</button>
-						<div>
-							{CartButtonHandler(
-								checkItemInObject(cartState.cartItems, itemInWishlist),
-								itemInWishlist
-							)}
-						</div>
+						
 					</div>
 				))}
 			{emptyToggle && <EmptyWishlist />}

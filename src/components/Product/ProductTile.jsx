@@ -3,11 +3,8 @@ import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
 import veg from "../../images/veg.png";
-import {
-	checkItemInObject,
-	CartButtonHandler,
-	wishlistHandler,
-} from "../../utilities";
+import { checkItemInObject, wishlistHandler } from "../../utilities";
+import { CartButtonHandler } from "./CartButtonHandler";
 import { useCart, useWishlist } from "../../contexts";
 import nonveg from "../../images/nonveg.png";
 import egg from "../../images/egg.png";
@@ -42,7 +39,8 @@ export function ProductTile({ itemInProduct: product }) {
 										? "REMOVE_FROM_WISHLIST"
 										: "ADD_TO_WISHLIST",
 									product,
-									wishlistDispatch
+									wishlistDispatch,
+									setLoading
 								)
 							}
 							style={{

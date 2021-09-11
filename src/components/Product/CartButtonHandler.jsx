@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
-import { cartHandler } from ".";
-import { useCart } from "../contexts";
-import { Loader } from "../components/Loader/Loader";
-export default function CartButtonHandler(
+import { cartHandler } from "../../utilities";
+import { useCart } from "../../contexts";
+import { Loader } from "../Loader/Loader";
+export function CartButtonHandler(
 	isItemInCart,
 	itemInProduct,
 	loading,
