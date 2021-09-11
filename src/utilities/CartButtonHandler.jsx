@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
 import { cartHandler } from ".";
 import { useCart } from "../contexts";
-export default function CartButtonHandler(isItemInCart, itemInProduct) {
+import { Loader } from "../components/Loader/Loader";
+export default function CartButtonHandler(
+	isItemInCart,
+	itemInProduct,
+	loading,
+	setLoading
+) {
 	const { cartDispatch } = useCart();
 	if (isItemInCart) {
 		return (
@@ -20,9 +26,11 @@ export default function CartButtonHandler(isItemInCart, itemInProduct) {
 			<button
 				class="from-product to-cart"
 				type="button"
-				onClick={() => cartHandler("ADD_TO_CART", itemInProduct, cartDispatch)}
+				onClick={() =>
+					cartHandler("ADD_TO_CART", itemInProduct, cartDispatch, setLoading)
+				}
 			>
-				+ Add to Cart
+				{loading ? Loader("bubbleLoader") : "+ Add to cart"}
 			</button>
 		</div>
 	);

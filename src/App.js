@@ -9,7 +9,7 @@ import {
 	Navbar,
 	Error404,
 	ForgotPassword,
-} from "./components";
+} from "./pages";
 import { Route, Routes } from "react-router-dom";
 export default function App() {
 	

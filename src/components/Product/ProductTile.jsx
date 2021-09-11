@@ -73,7 +73,9 @@ export function ProductTile({ itemInProduct: product }) {
 			</div>
 			{CartButtonHandler(
 				checkItemInObject(cartState.cartItems, product),
-				product
+				product,
+				loading,
+				setLoading
 			)}
 		</div>
 	);

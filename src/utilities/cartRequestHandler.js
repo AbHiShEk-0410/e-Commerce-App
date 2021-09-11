@@ -1,9 +1,15 @@
 import axios from "axios";
-export async function cartHandler(query, productDetails, cartDispatch) {
+export async function cartHandler(
+	query,
+	productDetails,
+	cartDispatch,
+	setLoading
+) {
 	const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 	switch (query) {
 		case "ADD_TO_CART":
 			try {
+				setLoading(true);
 				const serverReponse = await axios.post(
 					process.env.REACT_APP_SERVER_URL + "/cart/add-to-cart",
 					{
@@ -19,6 +25,8 @@ export async function cartHandler(query, productDetails, cartDispatch) {
 				cartDispatch(serverReponse.data.data);
 			} catch (error) {
 				console.log(error.response);
+			} finally {
+				setLoading(false);
 			}
 			break;
 		case "INCREASE_COUNT":
