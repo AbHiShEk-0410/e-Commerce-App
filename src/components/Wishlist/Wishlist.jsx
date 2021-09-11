@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCart, useWishlist } from "../contexts/";
+import { useCart, useWishlist } from "../../contexts";
 import {
 	checkItemInObject,
 	wishlistHandler,
 	CartButtonHandler,
-} from "../utilities";
-import EmptyWishlist from "./EmptyWishlist";
+} from "../../utilities";
+import EmptyWishlist from "../EmptyWishlist/EmptyWishlist";
 
 export default function Wishlist() {
 	const { wishlistState, wishlistDispatch } = useWishlist();

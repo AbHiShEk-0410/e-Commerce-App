@@ -1,9 +1,9 @@
-import "./CSS/signup.css";
-import signup_banner from "../images/singup_banner.png";
-import front_logo from "../images/front-logo.png";
+import "./signup.css";
+import signup_banner from "../../images/singup_banner.png";
+import front_logo from "../../images/front-logo.png";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { checkSignupParams } from "../utilities";
+import { checkSignupParams } from "../../utilities";
 import axios from "axios";
 export default function Signup() {
 	const navigate = useNavigate();

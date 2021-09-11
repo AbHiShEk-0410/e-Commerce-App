@@ -1,5 +1,5 @@
-import "./CSS/empty.css";
-import emptyCart from "../images/emptyCart.png";
+import "./emptyCart.css";
+import emptyCart from "../../images/emptyCart.png";
 export default function EmptyCart() {
 	return (
 		<div className="empty">

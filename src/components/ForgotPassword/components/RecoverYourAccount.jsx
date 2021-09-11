@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
-import { password } from "../../constants";
-import { queryStringToObject } from "../../utilities";
+import { password } from "../../../constants";
+import { queryStringToObject } from "../../../utilities";
 import { Navigate } from "react-router";
 export default function RecoverYourAccount() {
 	const [userInput, setUserInput] = useState({

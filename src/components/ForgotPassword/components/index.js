@@ -2,7 +2,7 @@ import FindYourAccount from "./FindYourAccount";
 import VerifyYourIdentity from "./VerifyYourIdentity";
 import RecoverYourAccount from "./RecoverYourAccount";
 
-export const recovery = {
+export const component = {
 	FindYourAccount,
 	VerifyYourIdentity,
 	RecoverYourAccount,

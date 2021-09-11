@@ -1,13 +1,13 @@
-import "./CSS/Navbar.css";
+import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLogin } from "../contexts";
+import { useLogin } from "../../contexts";
 import {
 	faUser,
 	faPowerOff,
 	faUserEdit,
 } from "@fortawesome/free-solid-svg-icons";
-import logo from "../images/front-logo.png";
+import logo from "../../images/front-logo.png";
 
 export default function Home() {
 	const { login, setLogin } = useLogin();

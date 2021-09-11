@@ -1,4 +1,4 @@
-import "./CSS/Error404.css"
+import "./Error404.css"
 export default function Error404() {
     return (
         <section class="page-404">

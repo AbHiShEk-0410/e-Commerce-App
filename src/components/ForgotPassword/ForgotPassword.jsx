@@ -1,16 +1,16 @@
-import "./CSS/forgot-password.css";
+import "./forgot-password.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { queryStringToObject } from "../utilities";
-import { recovery } from "./recovery";
-import { containerVariants } from "../constants";
-import { Error404 } from "./";
+import { queryStringToObject } from "../../utilities";
+import { component } from "./components";
+import { containerVariants } from "../../constants";
+import { Error404 } from "..";
 
 const recoveryPages = {
-	findYourAccount: recovery.FindYourAccount,
-	verifyYourAccount: recovery.VerifyYourIdentity,
-	recoverYourAccount: recovery.RecoverYourAccount,
+	findYourAccount: component.FindYourAccount,
+	verifyYourAccount: component.VerifyYourIdentity,
+	recoverYourAccount: component.RecoverYourAccount,
 	error: Error404,
 };
 

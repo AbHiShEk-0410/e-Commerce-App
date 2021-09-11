@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { isItUsernameOrEmail } from "../../utilities";
+import { isItUsernameOrEmail } from "../../../utilities";
 
 export default function FindYourAccount() {
 	const navigate = useNavigate();

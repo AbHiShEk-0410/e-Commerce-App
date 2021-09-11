@@ -4,7 +4,6 @@ import {
 	Wishlist,
 	Login,
 	Cart,
-	Loader,
 	Signup,
 	PrivateRoute,
 	Navbar,
@@ -12,13 +11,12 @@ import {
 	ForgotPassword,
 } from "./components";
 import { Route, Routes } from "react-router-dom";
-import { useLogin } from "./contexts";
 export default function App() {
-	const { loader } = useLogin();
+	
 	return (
 		<div className="App">
 			<Navbar />
-			{loader && <Loader />}
+			
 			<Routes>
 				<Route path="/product">
 					<Product />

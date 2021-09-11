@@ -1,5 +1,5 @@
-import "./CSS/empty.css";
-import emptyWishlist from "../images/emptyWishlist.png";
+import "./emptyWishlist.css";
+import emptyWishlist from "../../images/emptyWishlist.png";
 export default function EmptyWishlist() {
 	return (
 		<div className="empty">

@@ -1,9 +1,9 @@
-import "./CSS/Login.css";
+import "./Login.css";
 import axios from "axios";
-import { useLogin } from "../contexts";
+import { useLogin } from "../../contexts";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { checkLoginParams } from "../utilities";
+import { checkLoginParams } from "../../utilities";
 
 export default function Login() {
 	const { state } = useLocation();

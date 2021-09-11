@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import axios from "axios";
-import { queryStringToObject } from "../../utilities";
+import { queryStringToObject } from "../../../utilities";
 
 export default function VerifyYourIdentity() {
 	const [userData, setUserData] = useState({});

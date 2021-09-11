@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./CSS/product.css";
+import "./product.css";
 import {
 	checkItemInObject,
 	SortFilter,
 	CartButtonHandler,
 	wishlistHandler,
-} from "../utilities";
-import { useCart, useWishlist, useSortFilter } from "../contexts";
-import veg from "../images/veg.png";
-import nonveg from "../images/nonveg.png";
-import egg from "../images/egg.png";
+} from "../../utilities";
+import { useCart, useWishlist, useSortFilter } from "../../contexts";
+import veg from "../../images/veg.png";
+import nonveg from "../../images/nonveg.png";
+import egg from "../../images/egg.png";
 import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee, BiWindows } from "react-icons/bi";
