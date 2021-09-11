@@ -56,99 +56,101 @@ export default function Cart() {
 							{cartState.cartItems.map(
 								(
 									itemInCart //For particular item
-								) => (
-									<div className="cart-tile" id={itemInCart._id}>
-										<div className="item-img">
-											<img src={itemInCart.img} alt="img"></img>
-										</div>
-										<div className="item-desc">
-											<h1>{itemInCart.name}</h1>
-											<div className="item-info">
-												<div className="food-info">
-													<img
-														src={
-															itemInCart.type === "vegetable"
-																? veg
-																: itemInCart.type === "non-veg"
-																? nonveg
-																: itemInCart.type === "Spices"
-																? veg
-																: egg
-														}
-														alt="food type"
-													/>
-													<FiBookmark
-														onClick={() =>
-															wishlistHandler(itemInCart, wishlistDispatch)
-														}
-														className="add-to-wishlist"
-														style={{
-															fill: checkItemInObject(
-																wishlistState.wishlistItems,
-																itemInCart
-															)
-																? "#0b002a"
-																: "white",
-														}}
-													/>
-												</div>
-												<div>
-													{" "}
-													<span className="item-price">
-														<BiRupee
+								) => {
+									return (
+										<div className="cart-tile" id={itemInCart._id}>
+											<div className="item-img">
+												<img src={itemInCart.img} alt="img"></img>
+											</div>
+											<div className="item-desc">
+												<h1>{itemInCart.name}</h1>
+												<div className="item-info">
+													<div className="food-info">
+														<img
+															src={
+																itemInCart.type === "vegetable"
+																	? veg
+																	: itemInCart.type === "non-veg"
+																	? nonveg
+																	: itemInCart.type === "Spices"
+																	? veg
+																	: egg
+															}
+															alt="food type"
+														/>
+														<FiBookmark
+															onClick={() =>
+																wishlistHandler(itemInCart, wishlistDispatch)
+															}
+															className="add-to-wishlist"
 															style={{
-																fontSize: "max(18px, 1.5vw)",
-																marginRight: "-4px",
+																fill: checkItemInObject(
+																	wishlistState.wishlistItems,
+																	itemInCart
+																)
+																	? "#0b002a"
+																	: "white",
 															}}
 														/>
-														<h3>{itemInCart.price * itemInCart.quantity}</h3>
-													</span>
+													</div>
+													<div>
+														{" "}
+														<span className="item-price">
+															<BiRupee
+																style={{
+																	fontSize: "max(18px, 1.5vw)",
+																	marginRight: "-4px",
+																}}
+															/>
+															<h3>{itemInCart.price * itemInCart.quantity}</h3>
+														</span>
+													</div>
+												</div>
+
+												<div className="quantity-regulators">
+													<button
+														onClick={() =>
+															cartHandler(
+																itemInCart.quantity === 1
+																	? "DELETE_FROM_CART"
+																	: "REMOVE_FROM_CART",
+																itemInCart,
+																cartDispatch
+															)
+														}
+													>
+														-
+													</button>
+													<span>{itemInCart.quantity}</span>
+
+													<button
+														onClick={() =>
+															cartHandler(
+																"INCREASE_COUNT",
+																itemInCart,
+																cartDispatch
+															)
+														}
+													>
+														+
+													</button>
 												</div>
 											</div>
-
-											<div className="quantity-regulators">
-												<button
+											<div className="remove-from-cart">
+												<BsTrash
+													className="trash"
 													onClick={() =>
 														cartHandler(
-															itemInCart.quantity === 1
-																? "DELETE_FROM_CART"
-																: "REMOVE_FROM_CART",
+															"DELETE_FROM_CART",
 															itemInCart,
 															cartDispatch
 														)
 													}
-												>
-													-
-												</button>
-												<span>{itemInCart.quantity}</span>
-
-												<button
-													onClick={() =>
-														cartHandler(
-															"INCREASE_COUNT",
-															itemInCart,
-															cartDispatch
-														)
-													}
-												>
-													+
-												</button>
+												/>
 											</div>
 										</div>
-										<div className="remove-from-cart">
-											<BsTrash
-												className="trash"
-												onClick={() =>
-													cartHandler(
-														"DELETE_FROM_CART",
-														itemInCart,
-														cartDispatch
-													)
-												}
-											/>
-										</div>
-									</div>
-								)
+									);
+								}
 							)}
 						</div>
 						<div className="billing-tile">
