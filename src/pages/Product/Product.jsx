@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./product.css";
-
 import { useCart, useWishlist, useSortFilter } from "../../contexts";
 
 import { ProductTile } from "../../components/Product/ProductTile";
@@ -75,12 +74,12 @@ export default function Product() {
 
 	return (
 		<div>
-			{/* Product Listing */}
 			<div class="product-listing">
 				{data.map((itemInProduct) => (
 					<ProductTile itemInProduct={itemInProduct} />
 				))}
 			</div>
+		
 		</div>
 	);
 }
