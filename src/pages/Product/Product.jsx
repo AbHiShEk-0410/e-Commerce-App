@@ -6,7 +6,7 @@ import { useCart, useWishlist, useSortFilter } from "../../contexts";
 import { ProductTile } from "../../components/Product/ProductTile";
 
 export default function Product() {
-	const {  wishlistDispatch } = useWishlist();
+	const { wishlistDispatch } = useWishlist();
 	const { cartDispatch } = useCart();
 
 	const {
@@ -49,7 +49,7 @@ export default function Product() {
 					}
 				);
 
-				wishlistDispatch(serverResponse.data.wishlist);
+				wishlistDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error);
 			}
@@ -79,7 +79,6 @@ export default function Product() {
 					<ProductTile itemInProduct={itemInProduct} />
 				))}
 			</div>
-		
 		</div>
 	);
 }
