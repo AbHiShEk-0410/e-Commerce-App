@@ -26,9 +26,10 @@ export default function Wishlist() {
 						},
 					}
 				);
+				console.log(serverResponse);
 				cartDispatch(serverResponse.data.data);
 			} catch (error) {
-				console.log(error.response.data);
+				console.log(error);
 			}
 		};
 		getCartFromServer();
@@ -70,7 +71,9 @@ export default function Wishlist() {
 					</div>
 					<hr />
 					<div className="wishlist-items">
-						{wishlistState.wishlistItems.map((item) => WishlistTile(item))}
+						{wishlistState.wishlistItems.map((item) => (
+							<WishlistTile item={item} />
+						))}
 					</div>
 				</div>
 			)}

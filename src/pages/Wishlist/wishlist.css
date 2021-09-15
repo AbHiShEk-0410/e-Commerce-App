@@ -116,6 +116,7 @@
 	cursor: pointer;
 	border-radius: 0 0 20px 0;
 }
+
 .delete-from-wishlist:hover {
 	background-color: var(--ternary-color);
 	font-weight: bold;
@@ -208,3 +209,4 @@
 		height: auto;
 	}
 }
+
