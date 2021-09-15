@@ -1,15 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCart, useWishlist } from "../../contexts";
-import { checkItemInObject, wishlistHandler } from "../../utilities";
-import { FiShoppingCart, FiBookmark, FiTrash2 } from "react-icons/fi";
-import { BiRupee } from "react-icons/bi";
+import { FiBookmark } from "react-icons/fi";
 import EmptyWishlist from "../EmptyWishlist/EmptyWishlist";
-import { facts } from "../../constants";
 import "./wishlist.css";
-import veg from "../../images/veg.png";
-import nonveg from "../../images/nonveg.png";
-import egg from "../../images/egg.png";
+import { WishlistTile } from "../../components/Wishlist/WishlistTile";
 
 export default function Wishlist() {
 	const { wishlistState, wishlistDispatch } = useWishlist();
@@ -66,7 +61,7 @@ export default function Wishlist() {
 	}, [wishlistState.wishlistItems]);
 
 	return (
-		<div className="wishlist-page">
+		<div style={{ padding: "0" }} className="wishlist-page">
 			{!wishlistStatus && (
 				<div className="wishlist-content">
 					<div className="banner">
@@ -75,56 +70,7 @@ export default function Wishlist() {
 					</div>
 					<hr />
 					<div className="wishlist-items">
-						{wishlistState.wishlistItems.map((item) => {
-							return (
-								<div className="wishlist-tile">
-									<div className="wishlist-item">
-										<img className="item-img" src={item.img} alt="" />
-										<div className="wishlist-item-details">
-											<div className="item-name">
-												<h1>{item.name}</h1>
-												<img
-													src={
-														item.type === "vegetable"
-															? veg
-															: item.type === "non-veg"
-															? nonveg
-															: item.type === "Spices"
-															? veg
-															: egg
-													}
-													alt="food type"
-												/>
-											</div>
-											<div className="item-price">
-												{" "}
-												<span>
-													<BiRupee />
-													{item.price}/{item.unit}
-												</span>
-											</div>
-											<div className="about">{facts[item.type]}</div>
-										</div>
-									</div>
-									<div className="wishlist-controllers">
-										<button className="delete-from-wishlist">
-											<FiTrash2 style={{ marginRight: "5px" }} />
-											Delete
-										</button>
-										<button className="cart-handler">
-											{checkItemInObject(cartState.cartItems, item) ? (
-												<span>
-													<FiShoppingCart style={{ marginRight: "5px" }} />
-													View Cart
-												</span>
-											) : (
-												"+ Add to cart"
-											)}
-										</button>
-									</div>
-								</div>
-							);
-						})}
+						{wishlistState.wishlistItems.map((item) => WishlistTile(item))}
 					</div>
 				</div>
 			)}
