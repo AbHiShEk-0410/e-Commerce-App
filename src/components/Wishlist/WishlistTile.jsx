@@ -10,6 +10,7 @@ import { wishlistHandler } from "../../utilities";
 import { BiRupee } from "react-icons/bi";
 import { facts } from "../../constants";
 import { useWishlist } from "../../contexts";
+import "./wishlist.css";
 export function WishlistTile({ item }) {
 	const { wishlistDispatch } = useWishlist();
 	const { cartState, cartDispatch } = useCart();
@@ -17,6 +18,11 @@ export function WishlistTile({ item }) {
 
 	return (
 		<div className="wishlist-tile">
+			{wishlistLoader && (
+				<div className="loader-parent">
+					<div className="loader"></div>
+				</div>
+			)}
 			<div className="wishlist-item">
 				<img className="item-img" src={item.img} alt="" />
 				<div className="wishlist-item-details">
