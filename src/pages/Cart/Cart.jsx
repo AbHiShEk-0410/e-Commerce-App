@@ -1,17 +1,11 @@
 import "./cart.css";
 import { useCart, useWishlist } from "../../contexts";
 import { useEffect, useState } from "react";
-import { cartHandler, wishlistHandler } from "../../utilities";
 import { EmptyCart } from "..";
-import { FiBookmark } from "react-icons/fi";
 import axios from "axios";
-import { BsTrash } from "react-icons/bs";
 import { BiRupee } from "react-icons/bi";
-import veg from "../../images/veg.png";
-import nonveg from "../../images/nonveg.png";
-import egg from "../../images/egg.png";
-import { checkItemInObject } from "../../utilities";
 
+import { CartTile } from "../../components/Cart/CartTile";
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
 	const { wishlistState, wishlistDispatch } = useWishlist();
@@ -56,101 +50,9 @@ export default function Cart() {
 							{cartState.cartItems.map(
 								(
 									itemInCart //For particular item
-								) => {
-									return (
-										<div className="cart-tile" id={itemInCart._id}>
-											<div className="item-img">
-												<img src={itemInCart.img} alt="img"></img>
-											</div>
-											<div className="item-desc">
-												<h1>{itemInCart.name}</h1>
-												<div className="item-info">
-													<div className="food-info">
-														<img
-															src={
-																itemInCart.type === "vegetable"
-																	? veg
-																	: itemInCart.type === "non-veg"
-																	? nonveg
-																	: itemInCart.type === "Spices"
-																	? veg
-																	: egg
-															}
-															alt="food type"
-														/>
-														<FiBookmark
-															onClick={() =>
-																wishlistHandler(itemInCart, wishlistDispatch)
-															}
-															className="add-to-wishlist"
-															style={{
-																fill: checkItemInObject(
-																	wishlistState.wishlistItems,
-																	itemInCart
-																)
-																	? "#0b002a"
-																	: "white",
-															}}
-														/>
-													</div>
-													<div>
-														{" "}
-														<span className="item-price">
-															<BiRupee
-																style={{
-																	fontSize: "max(18px, 1.5vw)",
-																	marginRight: "-4px",
-																}}
-															/>
-															<h3>{itemInCart.price * itemInCart.quantity}</h3>
-														</span>
-													</div>
-												</div>
-
-												<div className="quantity-regulators">
-													<button
-														onClick={() =>
-															cartHandler(
-																itemInCart.quantity === 1
-																	? "DELETE_FROM_CART"
-																	: "REMOVE_FROM_CART",
-																itemInCart,
-																cartDispatch
-															)
-														}
-													>
-														-
-													</button>
-													<span>{itemInCart.quantity}</span>
-
-													<button
-														onClick={() =>
-															cartHandler(
-																"INCREASE_COUNT",
-																itemInCart,
-																cartDispatch
-															)
-														}
-													>
-														+
-													</button>
-												</div>
-											</div>
-											<div className="remove-from-cart">
-												<BsTrash
-													className="trash"
-													onClick={() =>
-														cartHandler(
-															"DELETE_FROM_CART",
-															itemInCart,
-															cartDispatch
-														)
-													}
-												/>
-											</div>
-										</div>
-									);
-								}
+								) => (
+									<CartTile item={itemInCart} />
+								)
 							)}
 						</div>
 						<div className="billing-tile">

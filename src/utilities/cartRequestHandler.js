@@ -31,7 +31,7 @@ export async function cartHandler(
 			break;
 		case "INCREASE_COUNT":
 			try {
-				alert("running");
+				setLoading(true);
 				const serverReponse = await axios.post(
 					process.env.REACT_APP_SERVER_URL + "/cart/increase-count",
 					{
@@ -47,11 +47,13 @@ export async function cartHandler(
 				cartDispatch(serverReponse.data.data);
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setLoading(false);
 			}
 			break;
 		case "REMOVE_FROM_CART":
 			try {
-				alert("running");
+				setLoading(true);
 				const serverReponse = await axios.post(
 					process.env.REACT_APP_SERVER_URL + "/cart/decrease-count",
 					{
@@ -67,11 +69,14 @@ export async function cartHandler(
 				cartDispatch(serverReponse.data.data);
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setLoading(false);
 			}
 			break;
 
 		case "DELETE_FROM_CART":
 			try {
+				setLoading(true);
 				const serverReponse = await axios.delete(
 					process.env.REACT_APP_SERVER_URL + "/cart/delete-from-cart",
 
@@ -88,6 +93,8 @@ export async function cartHandler(
 				cartDispatch(serverReponse.data.data);
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setLoading(false);
 			}
 			break;
 
