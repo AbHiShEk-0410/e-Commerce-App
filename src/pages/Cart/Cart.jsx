@@ -5,22 +5,16 @@ import { useCart } from "../../contexts";
 import { EmptyCart } from "..";
 import { CartTile } from "../../components/Cart/CartTile";
 import { Billing } from "../../components/Cart/Billing";
+import { Loader } from "../../components/Loader/Loader";
 export default function Cart() {
 	const { cartState, cartDispatch } = useCart();
 	const [balance, setBalance] = useState(0);
-
-	useEffect(() => {
-		setBalance(
-			cartState.cartItems.reduce(
-				(total, item) => total + item.quantity * item.price,
-				0
-			)
-		);
-	}, [cartState.cartItems]);
+	const [pageLoader, setPageLoader] = useState(false);
 	useEffect(() => {
 		const getCartFromServer = async () => {
 			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 			try {
+				setPageLoader(true);
 				const serverResponse = await axios.get(
 					process.env.REACT_APP_SERVER_URL + "/cart",
 					{
@@ -32,13 +26,24 @@ export default function Cart() {
 				cartDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error.response.data);
-				return [];
+			} finally {
+				setPageLoader(false);
 			}
 		};
 		getCartFromServer();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cartDispatch]);
 
-	return (
+	useEffect(() => {
+		setBalance(
+			cartState.cartItems.reduce(
+				(total, item) => total + item.quantity * item.price,
+				0
+			)
+		);
+	}, [cartState.cartItems]);
+
+	return pageLoader === false ? (
 		<div>
 			{balance !== 0 && (
 				<div className="cart-page">
@@ -56,5 +61,7 @@ export default function Cart() {
 			)}
 			{balance === 0 && <EmptyCart />}
 		</div>
+	) : (
+		Loader("spinnerLoader")
 	);
 }
