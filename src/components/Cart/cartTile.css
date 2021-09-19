@@ -1,0 +1,164 @@
+.cart-tile {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	min-width: 90%;
+	margin: auto;
+	align-items: center;
+	padding: var(--harder-padding-gap);
+	position: relative;
+	border-radius: var(--soft-border-radius);
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.item-img {
+	border-radius: 50%;
+	border: 1px solid black;
+	padding: var(--soft-padding-gap);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+		rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+	overflow: hidden;
+}
+.item-img img {
+	width: max(130px, 8vw);
+}
+.item-desc {
+	display: flex;
+	flex-direction: column;
+}
+.item-desc h1 {
+	color: var(--primary-color);
+	font-family: var(--card-tile-font);
+	font-weight: lighter;
+	font-size: max(30px, 2vw);
+	align-self: flex-start;
+}
+.item-info {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+.food-info img {
+	width: max(23px, 1.5vw);
+}
+.add-to-wishlist {
+	cursor: pointer;
+	font-size: max(25px, 1.7vw);
+}
+.item-price {
+	display: flex;
+	align-items: center;
+	color: var(--primary-color);
+	justify-content: center;
+}
+.item-price * {
+	font-weight: lighter;
+}
+.quantity-regulators {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.quantity-regulators * {
+	margin: 10px;
+}
+.quantity-regulators button {
+	width: max(27px, 1.8vw);
+	height: max(27px, 1.8vw);
+	cursor: pointer;
+	border: none;
+	font-size: max(20px, 1.3vw);
+	padding: 2px;
+	background-color: var(--ternary-color);
+	color: white;
+	font-weight: bolder;
+	border-radius: 50%;
+	font-weight: bolder;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+		rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.quantity-regulators span {
+	padding: var(--soft-padding-gap);
+	border: 1px solid var(--grayish-black);
+	font-weight: bold;
+	background-color: var(--secondary-color);
+	font-size: max(20px, 1.6vw);
+	width: max(45px, 4.5vw);
+}
+.item-price h3 {
+	font-size: max(23px, 2vw);
+}
+.remove-from-cart {
+	position: absolute;
+	right: 7px;
+	top: 7px;
+	width: 40px;
+	height: 40px;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+.trash {
+	position: absolute;
+	font-size: 20px;
+	top: 5px;
+	right: 5px;
+}
+.remove-from-cart:hover {
+	background-color: var(--ternary-color);
+	color: white;
+	font-weight: bold;
+	border-radius: 0 4px 0 32px;
+	overflow: hidden;
+}
+
+@media screen and (max-width: 511px) {
+	.cart-tile {
+		padding-left: 0px;
+		padding-right: 0px;
+		width: 200%;
+	}
+	.item-img {
+		padding: 0;
+	}
+	.item-img img {
+		width: 150px;
+	}
+	.item-desc {
+		font-size: 12vw;
+	}
+
+	.item-desc h1 {
+		font-size: 7vw;
+	}
+	.quantity-regulators button {
+		width: max(23px, 4.9vw);
+		height: max(23px, 4.9vw);
+		font-weight: lighter;
+		padding-bottom: var(--soft-padding-gap);
+	}
+	.quantity-regulators span {
+		font-weight: lighter;
+		font-size: max(15px, 3vw);
+		width: max(30px, 7.5vw);
+	}
+	.item-price {
+		margin-top: 16px;
+	}
+	.food-info img {
+		width: max(17px, 4.5vw);
+	}
+	.add-to-wishlist {
+		cursor: pointer;
+		font-size: max(17px, 4.5vw);
+	}
+	.item-price h3 {
+		font-size: max(10px, 4.5vw);
+	}
+}
+@media screen and (max-width: 719px) {
+	.cart-tile {
+		max-width: 100%;
+	}
+}

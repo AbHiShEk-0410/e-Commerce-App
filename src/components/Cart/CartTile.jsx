@@ -12,6 +12,7 @@ import { FiBookmark } from "react-icons/fi";
 import veg from "../../images/veg.png";
 import nonveg from "../../images/nonveg.png";
 import egg from "../../images/egg.png";
+import "./cartTile.css";
 
 export function CartTile({ item }) {
 	const { cartDispatch } = useCart();
@@ -102,13 +103,13 @@ export function CartTile({ item }) {
 					</button>
 				</div>
 			</div>
-			<div className="remove-from-cart">
-				<BsTrash
-					className="trash"
-					onClick={() =>
-						cartHandler("DELETE_FROM_CART", item, cartDispatch, setCartLoader)
-					}
-				/>
+			<div
+				onClick={() =>
+					cartHandler("DELETE_FROM_CART", item, cartDispatch, setCartLoader)
+				}
+				className="remove-from-cart"
+			>
+				<BsTrash className="trash" />
 			</div>
 		</div>
 	);
