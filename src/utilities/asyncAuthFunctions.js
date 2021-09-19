@@ -17,8 +17,6 @@ export async function asyncAuthFunctions(payload) {
 	console.log(payload);
 
 	const { data, query } = payload;
-	alert(query);
-
 	switch (query) {
 		case "SIGNUP":
 			try {
@@ -26,7 +24,6 @@ export async function asyncAuthFunctions(payload) {
 					data.email,
 					data.password
 				);
-				alert("Server Reponse Comming");
 				console.log(serverResponse);
 
 				localStorage.setItem("isUserLogin", JSON.stringify(true));

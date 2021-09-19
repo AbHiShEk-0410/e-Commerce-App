@@ -15,7 +15,14 @@ export function CartButtonHandler(
 			<div>
 				<Link to="/cart">
 					<button class="from-product view-cart ">
-						<FiShoppingCart /> View Cart
+						{loading ? (
+							Loader("bubbleLoader")
+						) : (
+							<span>
+								{" "}
+								<FiShoppingCart /> View Cart
+							</span>
+						)}
 					</button>
 				</Link>
 			</div>

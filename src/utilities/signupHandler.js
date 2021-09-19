@@ -31,11 +31,8 @@ function checkSignupParams(userDetails) {
 
 export async function signupHandler(userDetails) {
 	const signupParamStatus = checkSignupParams(userDetails);
-	alert("Inside signup handler");
 	if (!signupParamStatus.success) {
-		alert(signupParamStatus.message);
 	} else {
-		alert("About to make an sync call");
 		try {
 			const authResponse = await asyncAuthFunctions({
 				data: {

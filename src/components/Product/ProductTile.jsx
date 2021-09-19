@@ -2,11 +2,10 @@ import { useState } from "react";
 import { FiBookmark, FiTruck } from "react-icons/fi";
 import { FaBalanceScale } from "react-icons/fa";
 import { BiRupee } from "react-icons/bi";
-
-import veg from "../../images/veg.png";
 import { checkItemInObject, wishlistHandler } from "../../utilities";
 import { CartButtonHandler } from "./CartButtonHandler";
 import { useCart, useWishlist } from "../../contexts";
+import veg from "../../images/veg.png";
 import nonveg from "../../images/nonveg.png";
 import egg from "../../images/egg.png";
 

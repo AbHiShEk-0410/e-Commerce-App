@@ -36,9 +36,7 @@ export default function RecoverYourAccount() {
 	console.log(disableButton);
 	async function changePassword() {
 		try {
-			alert("Running");
-
-			const serverReponse = await axios.post(
+				const serverReponse = await axios.post(
 				"https://database-1.joygupta1.repl.co/user/reset-password",
 				{
 					_id: searchObj.userId,

@@ -53,5 +53,4 @@ export async function wishlistHandler(
 		default:
 			break;
 	}
-	console.log(accessToken);
 }

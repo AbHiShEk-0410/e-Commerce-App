@@ -14,7 +14,6 @@ export default function Signup() {
 	}, [userDetails]);
 
 	async function userSignup(event) {
-		alert("Trigger");
 		event.preventDefault();
 		try {
 			const serverResponse = await axios.post(
