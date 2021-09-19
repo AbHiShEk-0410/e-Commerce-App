@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./product.css";
 import { useCart, useWishlist, useSortFilter } from "../../contexts";
-
+import { Loader } from "../../components/Loader/Loader";
 import { ProductTile } from "../../components/Product/ProductTile";
 
 export default function Product() {
 	const { wishlistDispatch } = useWishlist();
 	const { cartDispatch } = useCart();
+	const [pageLoader, setPageLoader] = useState(false);
 
 	const {
 		state: { showFastDelivery, showInventory, sortBy },
@@ -16,6 +17,7 @@ export default function Product() {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
+		setPageLoader(true);
 		const getCartFromServer = async () => {
 			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 			try {
@@ -31,12 +33,15 @@ export default function Product() {
 				cartDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setPageLoader(false);
 			}
 		};
 		getCartFromServer();
 	}, [cartDispatch]);
 
 	useEffect(() => {
+		setPageLoader(true);
 		const getWishlistFromServer = async () => {
 			const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 			try {
@@ -52,12 +57,15 @@ export default function Product() {
 				wishlistDispatch(serverResponse.data.data);
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setPageLoader(false);
 			}
 		};
 		getWishlistFromServer();
 	}, [wishlistDispatch]);
 
 	useEffect(() => {
+		setPageLoader(true);
 		const loadProducts = async () => {
 			try {
 				const response = await axios(
@@ -67,12 +75,14 @@ export default function Product() {
 			} catch (error) {
 				console.log(error);
 				setData([]);
+			} finally {
+				setPageLoader(false);
 			}
 		};
 		loadProducts();
 	}, []);
 
-	return (
+	return pageLoader === false ? (
 		<div>
 			<div class="product-listing">
 				{data.map((itemInProduct) => (
@@ -80,5 +90,7 @@ export default function Product() {
 				))}
 			</div>
 		</div>
+	) : (
+		Loader("spinnerLoader")
 	);
 }
