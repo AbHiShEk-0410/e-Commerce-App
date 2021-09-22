@@ -14,7 +14,7 @@ export default function Login() {
 	useEffect(() => {
 		//Navigate user from login route to product if already logged in otherwise to login
 		login ? navigate("/product") : navigate("/login");
-	}, []);
+	}, [login, navigate]);
 
 	useEffect(() => {
 		//Will help in enabling/disabling the Login button

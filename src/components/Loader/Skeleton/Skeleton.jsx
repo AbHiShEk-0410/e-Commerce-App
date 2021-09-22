@@ -1,22 +1,27 @@
 import "./skeleton.css";
-export function Skeleton() {
+function Line() {
 	return (
 		<div>
-			<span class="skeleton-loader line"></span>
+			<span class="skeleton-loader "></span>
 		</div>
 	);
 }
-export function Circle() {
+function Circle() {
 	return (
 		<div>
-			<span class="skeleton-loader circle"></span>
+			<span class="skeleton-loader "></span>
 		</div>
 	);
 }
-export function Square({ width, height }) {
+function Square() {
 	return (
 		<div>
-			<span className="skeleton-loader"></span>
+			<span className="skeleton-loader "></span>
 		</div>
 	);
 }
+export const Skeleton = {
+	Circle,
+	Square,
+	Line,
+};

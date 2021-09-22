@@ -22,7 +22,7 @@ export default function VerifyYourIdentity() {
 			}
 		};
 		getDataFromServer();
-	}, []);
+	}, [searchObj.userId]);
 
 	async function validateUser() {
 		try {

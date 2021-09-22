@@ -10,13 +10,7 @@ import {
 	Error404,
 	ForgotPassword,
 } from "./pages";
-import {
-	Skeleton,
-	Circle,
-	Square,
-} from "./components/Loader/Skeleton/Skeleton";
 import { Route, Routes } from "react-router-dom";
-
 export default function App() {
 	return (
 		<div className="App">

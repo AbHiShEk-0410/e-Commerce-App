@@ -99,3 +99,25 @@ body {
 	box-shadow: rgba(104, 75, 75, 0.16) 0px 1px 4px;
 	cursor: pointer;
 }
+.skeleton-img {
+	height: 60%;
+	width: 100%;
+	border-radius: var(--soft-border-radius) var(--soft-border-radius) 0 0;
+}
+.skeleton-name {
+	height: 20px;
+	width: 200px;
+	border-radius: 10px;
+}
+.skeleton-food-type * {
+	width: 100px;
+	height: 20px;
+}
+.skeleton-button {
+	height: 40px;
+}
+
+.skeleton-product {
+	width: 21vw;
+	max-width: 460px;
+}

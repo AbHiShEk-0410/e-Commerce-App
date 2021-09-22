@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./product.css";
-import { useCart, useWishlist, useSortFilter } from "../../contexts";
+import { useCart, useWishlist, } from "../../contexts";
 import { Loader } from "../../components/Loader/Loader";
 import { ProductTile } from "../../components/Product/ProductTile";
 
@@ -10,10 +10,10 @@ export default function Product() {
 	const { cartDispatch } = useCart();
 	const [pageLoader, setPageLoader] = useState(false);
 
-	const {
-		state: { showFastDelivery, showInventory, sortBy },
-		dispatch,
-	} = useSortFilter();
+	// const {
+	// 	state: { showFastDelivery, showInventory, sortBy },
+	// 	dispatch,
+	// } = useSortFilter();
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
